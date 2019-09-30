@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset
+    xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+    <url>
+        <loc>http://www.oursite.com/</loc>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>http://www.oursite.com/search?item=12&desc=vacation_hawaii</loc>
+    </url>
+    <url>
+        <loc>http://www.oursite.com/catalog?item=12&desc=vacation_hawaii</loc>
+    </url>
+    <url>
+        <loc>http://www.oursite.com/results?item=12&desc=vacation_hawaii</loc>
+    </url>
+    <url>
+        <loc>http://www.oursite.com/register.php</loc>
+    </url>
+    <url>
+        <loc>http://www.oursite.com/newObj.php</loc>
+    </url>
+</urlset>
