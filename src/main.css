@@ -1,0 +1,10 @@
+body{
+	background-color:black;
+	color:white;
+	text-align:center;
+}
+
+.name{
+	font-family:"Comic Sans MS", cursive, sans-serif;
+	margin-top:2%;
+}
