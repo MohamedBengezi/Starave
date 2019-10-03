@@ -10,10 +10,3 @@ body{
 	background-repeat: no-repeat;
 	height:auto;
 }
-
-.name{
-	font-family:"Comic Sans MS", cursive, sans-serif;
-	margin-top:2%;
-	background-image: url("../../assets/logo.png");
-
-}
