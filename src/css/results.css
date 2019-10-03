@@ -1,0 +1,42 @@
+html{
+	height:100%;
+}
+body{	
+	background-image: url("../../assets/logo.png");
+	color:black;
+	background-color:#343a40;
+	text-align:center;
+	background-size:contain;
+	background-repeat: no-repeat;
+	height:100%;
+}
+
+.name{
+	font-family:"Comic Sans MS", cursive, sans-serif;
+	margin-top:2%;
+	background-image: url("../../assets/logo.png");
+
+}
+
+.club-image {
+	position: relative;
+	left: -42%;
+	height: 60%;
+	width: 15%;
+	border: 3px solid
+	
+}
+.checked {
+	color: orange;
+  }
+
+.rating {
+	position: relative;
+	margin-top: 7%;
+	left: -43%
+}
+
+.desc{
+	position: relative;
+	margin-top: -10%;
+}

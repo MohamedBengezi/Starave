@@ -29,80 +29,39 @@
                     <a class="nav-link" href="#">Register</a>
                 </li>
             </ul>
-            <form class="form-inline my-2 my-lg-0">
-                <input class="form-control mr-sm-2" type="search" placeholder="Search for clubs" aria-label="Search">
-                <a href="search.html">
-                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-                </a>
+            <form class="form-inline my-2 my-lg-0" action="search.html">
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
             </form>
         </div>
     </nav>
 
+    <div class="search-form">
+        <div id="location-select">
+            <h2>Location</h2>
+            <select class="custom-select" multiple>
+                <option selected value="1">Hamilton</option>
+                <option value="2">Toronto</option>
+                <option value="3">Niagara</option>
+            </select>
+        </div id="rating-select">
+        <h2>Rating</h2>
+        <select class="custom-select" multiple>
+            <option selected value="1">1+ stars</option>
+            <option value="2">2+ stars</option>
+            <option value="3">3+ stars</option>
+            <option value="3">4+ stars</option>
+            <option value="3">5 stars</option>
+        </select>
 
-    <div class="search-results h-100">
-        <div class="list-group h-100">
-            <a href="./clubs/modrn.html" class="list-group-item list-group-item-action flex-column align-items-start h-100">
-                <div class="d-flex w-100 justify-content-between">
-                    <h5 class="mb-1">Modrn Night Club</h5>
-                    <small>3 days ago</small>
-                </div>
-                <div>
-                    <img class="club-image" src="../assets/modrn.jpeg" alt="Modrn Thumbnail" />
-                </div>
-                <div class="desc">
-                    <p class="mb-1">A 5-star nightclub dedicated to helping you have a great time</p>
-                    <small>Located in the heart of Hamilton's nightlife</small>
-                </div>
-                <div class="rating">
-                    <span class="fa fa-star checked"></span>
-                    <span class="fa fa-star checked"></span>
-                    <span class="fa fa-star checked"></span>
-                    <span class="fa fa-star checked"></span>
-                    <span class="fa fa-star"></span>
-                </div>
-            </a>
-            <a href="dirtydog.html" class="list-group-item list-group-item-action flex-column align-items-start h-100">
-                    <div class="d-flex w-100 justify-content-between">
-                        <h5 class="mb-1">Dirty Dog Saloon</h5>
-                        <small>3 days ago</small>
-                    </div>
-                    <div>
-                        <img class="club-image" src="../assets/dirtydogs.jpeg" alt="Modrn Thumbnail" />
-                    </div>
-                    <div class="desc">
-                        <p class="mb-1">A 5-star nightclub dedicated to helping you have a great time</p>
-                        <small>Located in the heart of Hamilton's nightlife</small>
-                    </div>
-                    <div class="rating">
-                        <span class="fa fa-star checked"></span>
-                        <span class="fa fa-star checked"></span>
-                        <span class="fa fa-star checked"></span>
-                        <span class="fa fa-star"></span>
-                        <span class="fa fa-star"></span>
-                    </div>
-                </a>
-                <a href="trust.html" class="list-group-item list-group-item-action flex-column align-items-start h-100">
-                        <div class="d-flex w-100 justify-content-between">
-                            <h5 class="mb-1">Trust Night Club</h5>
-                            <small>3 days ago</small>
-                        </div>
-                        <div>
-                            <img class="club-image" src="../assets/trust.jpeg" alt="Modrn Thumbnail" />
-                        </div>
-                        <div class="desc">
-                            <p class="mb-1">A 5-star nightclub dedicated to helping you have a great time</p>
-                            <small>Located in the heart of Hamilton's nightlife</small>
-                        </div>
-                        <div class="rating">
-                            <span class="fa fa-star checked"></span>
-                            <span class="fa fa-star checked"></span>
-                            <span class="fa fa-star"></span>
-                            <span class="fa fa-star"></span>
-                            <span class="fa fa-star"></span>
-                        </div>
-                    </a>
+        <form class="form-inline my-2 my-lg-0" action="results.html">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Find Clubs!</button>
+        </form>
+
+        <div>
+
         </div>
     </div>
+
 </body>
 
 </html>
