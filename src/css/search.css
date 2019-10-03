@@ -1,12 +1,19 @@
 html{
 	height:100%;
 }
-body{	
-	background-image: url("../../assets/logo.png");
+body{
 	color:black;
-	background-color:#343a40;
+	background-color:#515253;
 	text-align:center;
 	background-size:contain;
 	background-repeat: no-repeat;
 	height:auto;
+}
+.search-form h2{
+	color: white;
+}
+
+.custom-select{
+	background-color: black;
+	color:white;
 }
