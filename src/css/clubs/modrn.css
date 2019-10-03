@@ -1,0 +1,151 @@
+body {
+    background: #232522;
+    /* fallback for old browsers */
+    background: -webkit-linear-gradient(to top, #232522, rgb(70, 71, 69));
+    background: -moz-linear-gradient(to top, #232522, rgb(70, 71, 69));
+    background: -o-linear-gradient(to top, #232522, rgb(70, 71, 69));
+    background: linear-gradient(to top, #232522, rgb(70, 71, 69));
+    background-size: cover;
+    background-attachment: fixed;
+    font-family: 'Roboto', sans-serif;
+}
+
+html{
+	height:100%;
+}
+h1, p {
+    font-family: 'Roboto', sans-serif;
+    color: #fff;
+
+}
+iframe {
+    width: 50%; 
+    height: 80%;
+  }
+
+h1 {
+    font-size: 3em;
+    margin-left: 33%; 
+    text-align:center;
+    font-weight: 100;
+    text-transform: capitalize;
+    letter-spacing: 4px;
+  }
+p {
+    font-weight: 35;
+
+
+}
+
+ul {
+    margin-left: 5%;
+    
+}
+
+.visit {
+    float: right;
+}
+
+.club-image {
+    margin-left: 4%;
+	position: relative;
+	height: 25%;
+    border: 3px solid #000;
+    display: flex;
+}
+.column {
+    flex: 33.33%;
+    width: 33%;
+    padding: 5px;
+  }
+  
+.desc{
+    position: relative;
+    display: flex;
+	color: #fff;
+}
+.desc::after {
+    content: "";
+    clear: both;
+    display: table;
+  }
+
+/* Style the container with a rounded border, grey background and some padding and margin */
+.container {
+    border: 2px solid #ccc;
+    background-color: #9fa09f;
+    border-radius: 5px;
+    padding: 16px;
+    margin: 16px 0;
+    margin-left: 4%;
+  }
+  
+  /* Clear floats after containers */
+  .container::after {
+    content: "";
+    clear: both;
+    display: table;
+    float: center;
+    margin-right: 10%;
+  }
+  
+  /* Float images inside the container to the left. Add a right margin, and style the image as a circle */
+  .container img {
+    float: left;
+    margin-right: 20px;
+    border-radius: 50%;
+  }
+  
+  /* Increase the font-size of a span element */
+  .container span {
+    font-size: 20px;
+    margin-right: 15px;
+  }
+
+
+  .rating {
+	position: relative;
+}
+
+.fullrating {
+    margin-left: 6%;
+}
+.checked {
+    display: inline-flex;
+    color: orange;
+    display: inline;
+    
+  }
+#map {
+    padding: 16px;
+    margin: 16px 0;
+    margin-left: 33%;
+}
+  
+  /* Add media queries for responsiveness. This will center both the text and the image inside the container */
+  @media (max-width: 500px) {
+    .container {
+      text-align: center;
+    }
+  
+    .container img {
+      margin: auto;
+      float: none;
+      display: block;
+    }
+    #map {
+        margin: auto;
+        float: none;
+        display: block;
+      }
+    iframe {
+        width: 300
+    }
+  }
+  /* Responsive layout - when the screen is less than 600px wide, make the two columns stack on top of each other instead of next to each other */
+@media screen and (max-width: 600px) {
+    .col-25, .col-75, input[type=submit] {
+        width: 100%;
+        margin-top: 0;
+    }
+}
