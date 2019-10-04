@@ -16,8 +16,8 @@
 <body>
 
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-            aria-expanded="false" aria-label="Toggle navigation">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
 
@@ -34,30 +34,35 @@
     </nav>
 
 
-
+    <!-- Club Name with bootstrap styling -->
     <div class="d-flex w-100 justify-content-between ">
         <h1 class="mb-1">Modrn Night Club</h1>
     </div>
-    <div class="desc">
-                <a href="http://modrnnightclub.com">
-        </a>
-        <img class="club-image column" src="../../assets/modrn.jpeg" alt="Modrn Thumbnail" />
 
+    <!-- Section for the club picture and desccription -->
+    <div class="desc">
+        <!-- picture -->
+        <img class="club-image column" src="../../assets/modrn.jpeg" alt="Modrn Thumbnail" />
+        <!-- Making some bullet points with descriptions. Using bootstrap to style -->
         <ul class="column mt-5">
             <li>
-                <p class="mb-1"><a href="http://modrnnightclub.com">Modrn nightclub</a> is one of the top-rated clubs in the hamilton area. With a great location, near food places,
+                <!-- Creating an in-text link to the club website -->
+                <p class="mb-1"><a href="http://modrnnightclub.com">Modrn nightclub</a> is one of the top-rated clubs in
+                    the hamilton area. With a great location, near food places,
                     convenience stores, and the city center! Modrn is known for it amazing music selection, which caters
                     mainly to the Pop and Hip/Hop genres.
                 </p>
             </li>
             <li>
-                <p class="mb-1">Modern regularly hosts a multiitude of events and offers a variety of services. Such events may include popular
-                    artist shows, birthday bashes, or holiday events. Weekly events include They're services include </p>
+                <p class="mb-1">Modern regularly hosts a multiitude of events and offers a variety of services. Such
+                    events may include popular
+                    artist shows, birthday bashes, or holiday events. Weekly events include They're services include
+                </p>
             </li>
         </ul>
-
     </div>
 
+    <!-- Section for the overall rating using font-awesome -->
     <div class="fullrating">
         <p>Total Rating: </p>
         <span class="fa fa-star checked"></span>
@@ -67,8 +72,11 @@
         <span class="fa fa-star "></span>
     </div>
 
+    <!-- first user review -->
     <div class="container">
+        <!-- user profile pic -->
         <img src="../../assets/chris.png" alt="Avatar" style="width:90px">
+        <!-- Name, title, and review -->
         <p>
             <span>Zak Bilal.</span> Local Guide</p>
         <p>The service was amazing, and the vibes were great. Would highly recommend</p>
@@ -81,7 +89,7 @@
             <span class="fa fa-star checked"></span>
         </div>
     </div>
-
+    <!-- Second user review -->
     <div class="container">
         <img src="../../assets/Sara.png" alt="Avatar" style="width:90px">
         <p>
@@ -97,6 +105,7 @@
         </div>
     </div>
 
+    <!-- embedded map using iframe -->
     <div id="map">
         <iframe src="http://maps.google.com.au/maps?q=Modrn+Nightclub&output=embed" />
     </div>

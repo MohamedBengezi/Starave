@@ -1,23 +1,15 @@
 html{
 	height:100%;
 }
+/* Styling for the body */
 body{	
-	background-image: url("../../assets/logo.png");
-	color:black;
-	background-color:#343a40;
 	text-align:center;
 	background-size:contain;
 	background-repeat: no-repeat;
 	height:100%;
 }
 
-.name{
-	font-family:"Comic Sans MS", cursive, sans-serif;
-	margin-top:2%;
-	background-image: url("../../assets/logo.png");
-
-}
-
+/* css for the club images */
 .club-image {
 	float: left;
 	left: -42%;
@@ -26,18 +18,12 @@ body{
 	border: 3px solid
 	
 }
+/* This is to fill in the rating stars. */
 .checked {
 	color: orange;
   }
 
-/*
-.rating {
-
-}
-
-.desc{
-}
- 
+  /*
    Add media queries for responsiveness. This will center both the text and the image inside the container */
   @media (max-width: 500px) {
     .container {

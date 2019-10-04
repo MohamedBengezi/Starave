@@ -1,4 +1,5 @@
 body {
+  /* Creating the background colour */
     background: #232522;
     /* fallback for old browsers */
     background: -webkit-linear-gradient(to top, #232522, rgb(70, 71, 69));

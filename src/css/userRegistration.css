@@ -10,13 +10,14 @@ body {
     font-family: 'Roboto', sans-serif;
   }
   
+  /* Styling for the 'User Registration' title of the page */
   h1 {
     font-size: 3em;
     text-align: center;
     color: #fff;
+    /* this is for changing boldness, case, and font of the title  */
     font-weight: 100;
     text-transform: capitalize;
-    letter-spacing: 4px;
     font-family: 'Roboto', sans-serif;
   }
   
@@ -25,17 +26,19 @@ body {
     padding: 3em 0 1em;
   }
   
+  /* Overall form styling */
   .main-agileinfo {
     width: 35%;
     margin: 3em auto;
     background: rgba(0, 0, 0, 0.18);
     background-size: cover;
   }
-  
+  /* centers all the input fields within the form */
   .agileits-top {
     padding: 3em;
   }
 
+  /* Footer styling */
   .footer {
     position: absolute;
     right: 0;
@@ -46,6 +49,7 @@ body {
     text-align: center;
   }
   
+  /* Styling for most of the input fields */
   input[type="text"], input[type="email"], input[type="password"], input[type="number"] {
     font-size: 0.9em;
     color: #fff;
@@ -65,7 +69,13 @@ body {
     font-family: 'Roboto', sans-serif;
   }
 
-  
+  /* Changing the color and display style of the radio button labels */
+  .gender {
+    color: grey;
+    display: inline;
+  }
+
+  /* Submit button style */
   input[type="submit"] {
     font-size: .9em;
     color: #fff;
@@ -80,15 +90,6 @@ body {
     letter-spacing: 4px;
   }
   
-  input[type="submit"]:hover {
-    -webkit-transition: .5s all;
-    -moz-transition: .5s all;
-    -o-transition: .5s all;
-    -ms-transition: .5s all;
-    transition: .5s all;
-    background: #8DC26F;
-  }
-
   /* Responsive layout - when the screen is less than 600px wide, make the two columns stack on top of each other instead of next to each other */
 @media screen and (max-width: 600px) {
   .col-25, .col-75, input[type=submit] {

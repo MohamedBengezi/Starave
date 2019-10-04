@@ -16,10 +16,10 @@
 </head>
 
 <body>
-
+    <!-- Explained in home.html -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-            aria-expanded="false" aria-label="Toggle navigation">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
 
@@ -38,19 +38,59 @@
         </div>
     </nav>
 
-
+    <!-- This div contains each object in the search results page-->
     <div class="search-results h-100">
         <div class="list-group h-100">
-            <a href="./clubs/modrn.html" class="list-group-item list-group-item-action flex-column align-items-start h-100">
+
+            <!-- Modrn Club object -->
+            <a href="./clubs/modrn.html"
+                class="list-group-item list-group-item-action flex-column align-items-start h-100">
+                <!-- Using bootstrap to format the title and date added on the club object -->
                 <div class="d-flex w-100 justify-content-between">
-                    <h5 class="mb-1 ml-5">Modrn Night Club</h5>
+                    <h5 class="mb-1 ml-3">Modrn Night Club</h5>
                     <small>3 days ago</small>
                 </div>
+                <!-- Adding an image of the club -->
                 <div>
                     <img class="club-image" src="../assets/modrn.jpeg" alt="Modrn Thumbnail" />
                 </div>
+                <!-- Section for the description of the club -->
                 <div class="desc mr-5">
                     <p class="mb-1">A 5-star nightclub dedicated to helping you have a great time</p>
+                    <small>Located in the heart of Hamilton's nightlife</small>
+                </div>
+                <!-- spacing out the ratings -->
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <!-- using font-awesome library to display the star ratings -->
+                <div class="rating mr-3">
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star"></span>
+                </div>
+            </a>
+
+            <!-- Dirty Dog Saloon object 
+                    The comments above apply for the other two club items as well-->
+            <a href="dirtydog.html" class="list-group-item list-group-item-action flex-column align-items-start h-100">
+                <div class="d-flex w-100 justify-content-between">
+                    <h5 class="mb-1 ml-3">Dirty Dog Saloon</h5>
+                    <small>5 days ago</small>
+                </div>
+                <div>
+                    <img class="club-image ml-1" src="../assets/dirtydogs.jpeg" alt="Modrn Thumbnail" />
+                </div>
+                <div class="desc">
+                    <p class="mb-1 ml-5">A 5-star nightclub dedicated to helping you have a great time</p>
                     <small>Located in the heart of Hamilton's nightlife</small>
                 </div>
                 <br>
@@ -66,74 +106,47 @@
                     <span class="fa fa-star checked"></span>
                     <span class="fa fa-star checked"></span>
                     <span class="fa fa-star checked"></span>
-                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star"></span>
                     <span class="fa fa-star"></span>
                 </div>
             </a>
-            <a href="dirtydog.html" class="list-group-item list-group-item-action flex-column align-items-start h-100">
-                    <div class="d-flex w-100 justify-content-between">
-                        <h5 class="mb-1 ml-5">Dirty Dog Saloon</h5>
-                        <small>5 days ago</small>
-                    </div>
-                    <div>
-                        <img class="club-image ml-1" src="../assets/dirtydogs.jpeg" alt="Modrn Thumbnail" />
-                    </div>
-                    <div class="desc">
-                        <p class="mb-1 ml-5">A 5-star nightclub dedicated to helping you have a great time</p>
-                        <small>Located in the heart of Hamilton's nightlife</small>
-                    </div>
-                    <br>
-                    <br>
-                    <br>
-                    <br>
-                    <br>
-                    <br>
-                    <br>
-                    <br>
-                    <br>
-                    <div class="rating mr-3">
-                        <span class="fa fa-star checked"></span>
-                        <span class="fa fa-star checked"></span>
-                        <span class="fa fa-star checked"></span>
-                        <span class="fa fa-star"></span>
-                        <span class="fa fa-star"></span>
-                    </div>
-                </a>
-                <a href="trust.html" class="list-group-item list-group-item-action flex-column align-items-start h-100">
-                        <div class="d-flex w-100 justify-content-between">
-                            <h5 class="mb-1 ml-3">Trust Night Club</h5>
-                            <small>9 days ago</small>
-                        </div>
-                        <div>
-                            <img class="club-image" src="../assets/trust.jpeg" alt="Modrn Thumbnail" />
-                        </div>
-                        <div class="desc">
-                            <p class="mb-1">A 5-star nightclub dedicated to helping you have a great time</p>
-                            <small>Located in the heart of Hamilton's nightlife</small>
-                        </div>
-                        <br>
-                        <br>
-                        <br>
-                        <br>
-                        <br>
-                        <br>
-                        <br>
-                        <br>
-                        <br>
-                        <div class="rating mr-3">
-                            <span class="fa fa-star checked"></span>
-                            <span class="fa fa-star checked"></span>
-                            <span class="fa fa-star"></span>
-                            <span class="fa fa-star"></span>
-                            <span class="fa fa-star"></span>
-                        </div>
-                    </a>
 
-                    <a class="list-group-item list-group-item-action flex-column align-items-start h-100">
-                            <div id="map text-center">
-                                    <iframe class="w-100 h-100" src="http://maps.google.com.au/maps?q=nightclubs+hamilton&output=embed" />
-                                </div>
-                        </a>
+            <!-- Trust Nightclub object -->
+            <a href="trust.html" class="list-group-item list-group-item-action flex-column align-items-start h-100">
+                <div class="d-flex w-100 justify-content-between">
+                    <h5 class="mb-1 ml-3">Trust Night Club</h5>
+                    <small>9 days ago</small>
+                </div>
+                <div>
+                    <img class="club-image" src="../assets/trust.jpeg" alt="Modrn Thumbnail" />
+                </div>
+                <div class="desc">
+                    <p class="mb-1">A 5-star nightclub dedicated to helping you have a great time</p>
+                    <small>Located in the heart of Hamilton's nightlife</small>
+                </div>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <div class="rating mr-3">
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star"></span>
+                    <span class="fa fa-star"></span>
+                    <span class="fa fa-star"></span>
+                </div>
+            </a>
+            <!-- Adding a section for the search results map. Using an image and bootstrap to style -->
+            <a class="list-group-item list-group-item-action flex-column align-items-start h-100">
+                <div id="map text-center">
+                    <img class="w-25" src="../assets/map.PNG" alt="Map" />
+                </div>
+            </a>
         </div>
     </div>
 </body>

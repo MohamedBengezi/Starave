@@ -5,7 +5,6 @@
     <title>Nightclub Review</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <link href="//fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i" rel="stylesheet">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="../lib/bootstrap.min.css">
@@ -15,8 +14,8 @@
 <body>
 
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-            aria-expanded="false" aria-label="Toggle navigation">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
 
@@ -32,27 +31,36 @@
         </div>
     </nav>
 
+    <!-- Div for the user registration form -->
     <div class="main-w3layouts wrapper">
         <h1>User Registration</h1>
         <div class="main-agileinfo col-75">
             <div class="agileits-top ">
                 <form action="#" method="post">
+                    <!-- All inputs for the form -->
                     <input class="text" type="text" name="Username" placeholder="Username" required="">
                     <input class="text email" type="email" name="email" placeholder="Email" required="">
                     <input class="text" type="password" name="password" placeholder="Password" required="">
                     <input class="text" type="password" name="password" placeholder="Confirm Password" required="">
                     <input class="text" type="number" name="quantity" min="18" max="99" placeholder="Age">
+                    <!-- Adding a label within the radio buttons to make the words clickable -->
+                    <input type="radio" name="gender" value="male" id="male"><label class="gender" for="male">
+                        Male</label> <br>
+                    <input type="radio" name="gender" value="female" id="female"> <label class="gender" for="female">
+                        Female</label><br>
+                    <input type="radio" name="gender" value="other" id="other"> <label class="gender" for="other">
+                        Other</label>
                     <input type="submit" value="SIGN UP">
                 </form>
-                <a style="margin-left: 37.5%;" href="#"> Login Now!</a>
             </div>
         </div>
 
     </div>
-    
+
+    <!-- The footer section -->
     <div class="footer">
-            <p>Footer</p>
-          </div>
+        <p>Footer</p>
+    </div>
 </body>
 
 </html>
