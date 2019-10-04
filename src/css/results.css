@@ -19,7 +19,7 @@ body{
 }
 
 .club-image {
-	position: relative;
+	float: left;
 	left: -42%;
 	height: 60%;
 	width: 15%;
@@ -30,13 +30,31 @@ body{
 	color: orange;
   }
 
+/*
 .rating {
-	position: relative;
-	margin-top: 7%;
-	left: -43%
+
 }
 
 .desc{
-	position: relative;
-	margin-top: -10%;
 }
+ 
+   Add media queries for responsiveness. This will center both the text and the image inside the container */
+  @media (max-width: 500px) {
+    .container {
+      text-align: center;
+    }
+  
+    .container img {
+      margin: auto;
+      float: none;
+      display: block;
+    }
+    #map {
+        margin: auto;
+        float: none;
+        display: block;
+      }
+    iframe {
+        width: 300
+    }
+  }

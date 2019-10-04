@@ -17,3 +17,9 @@ body{
 	background-color: black;
 	color:white;
 }
+
+.name, .name::placeholder {
+	background-color:black;
+	color: white;
+
+}
