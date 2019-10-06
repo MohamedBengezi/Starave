@@ -1,0 +1,99 @@
+body {
+    background: #232522;
+    /* fallback for old browsers */
+    background: -webkit-linear-gradient(to top, #232522, rgb(70, 71, 69));
+    background: -moz-linear-gradient(to top, #232522, rgb(70, 71, 69));
+    background: -o-linear-gradient(to top, #232522, rgb(70, 71, 69));
+    background: linear-gradient(to top, #232522, rgb(70, 71, 69));
+    background-size: cover;
+    background-attachment: fixed;
+    font-family: 'Roboto', sans-serif;
+  }
+  
+  /* Styling for the 'User Registration' title of the page */
+  h1 {
+    font-size: 3em;
+    text-align: center;
+    color: #fff;
+    /* this is for changing boldness, case, and font of the title  */
+    font-weight: 100;
+    text-transform: capitalize;
+    font-family: 'Roboto', sans-serif;
+  }
+  
+  /*-- main --*/
+  .main-w3layouts {
+    padding: 3em 0 1em;
+  }
+  
+  /* Overall form styling */
+  .main-agileinfo {
+    width: 35%;
+    margin: 3em auto;
+    background: rgba(0, 0, 0, 0.18);
+    background-size: cover;
+  }
+  /* centers all the input fields within the form */
+  .agileits-top {
+    padding: 3em;
+  }
+
+  /* Footer styling */
+  .footer {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    padding: 1rem;
+    background-color: #efefef;
+    text-align: center;
+  }
+  
+  /* Styling for most of the input fields */
+  input[type="text"], input[type="email"], input[type="password"], input[type="number"] {
+    font-size: 0.9em;
+    color: #fff;
+    font-weight: 100;
+    width: 94.5%;
+    display: block;
+    border: none;
+    padding: 0.8em;
+    border: solid 1px rgba(255, 255, 255, 0.37);
+    -webkit-transition: all 0.3s cubic-bezier(0.64, 0.09, 0.08, 1);
+    transition: all 0.3s cubic-bezier(0.64, 0.09, 0.08, 1);
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 96%, #fff 4%);
+    background-position: -800px 0;
+    background-size: 100%;
+    background-repeat: no-repeat;
+    color: #fff;
+    font-family: 'Roboto', sans-serif;
+  }
+
+  /* Changing the color and display style of the radio button labels */
+  .gender {
+    color: grey;
+    display: inline;
+  }
+
+  /* Submit button style */
+  input[type="submit"] {
+    font-size: .9em;
+    color: #fff;
+    background: #76b852;
+    outline: none;
+    border: 1px solid #76b852;
+    cursor: pointer;
+    padding: 0.9em;
+    -webkit-appearance: none;
+    width: 100%;
+    margin: 2em 0;
+    letter-spacing: 4px;
+  }
+  
+  /* Responsive layout - when the screen is less than 600px wide, make the two columns stack on top of each other instead of next to each other */
+@media screen and (max-width: 600px) {
+  .col-25, .col-75, input[type=submit] {
+    width: 100%;
+    margin-top: 0;
+  }
+}
