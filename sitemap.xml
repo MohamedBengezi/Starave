@@ -2,23 +2,23 @@
 <urlset
     xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
-        <loc>http://www.oursite.com/</loc>
+        <loc>http://www.starave.club/</loc>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
-        <loc>http://www.oursite.com/search?item=12&desc=vacation_hawaii</loc>
+        <loc>http://www.starave.club/src/home.html</loc>
     </url>
     <url>
-        <loc>http://www.oursite.com/catalog?item=12&desc=vacation_hawaii</loc>
+        <loc>http://www.starave.club/src/userRegistration.html</loc>
     </url>
     <url>
-        <loc>http://www.oursite.com/results?item=12&desc=vacation_hawaii</loc>
+        <loc>http://www.starave.club/src/objectRegistration.html</loc>
     </url>
     <url>
-        <loc>http://www.oursite.com/register.php</loc>
+        <loc>http://www.starave.club/src/search.html?</loc>
     </url>
     <url>
-        <loc>http://www.oursite.com/newObj.php</loc>
+        <loc>http://www.starave.club/src/results.html?</loc>
     </url>
 </urlset>
