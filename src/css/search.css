@@ -1,6 +1,7 @@
 html{
 	height:100%;
 }
+/* Styling for the body */
 body{
 	color:black;
 	background-color:#515253;
@@ -21,6 +22,7 @@ footer {
     text-align: center;
 }
 
+/** Styling for the search stuff **/
 .search-form h2{
 	color: white;
 }
