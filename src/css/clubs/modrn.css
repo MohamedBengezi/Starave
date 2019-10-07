@@ -130,15 +130,16 @@ footer {
     
   }
 #map {
-    padding: 16px;
-    margin: 16px 0;
-    margin-left: 33%;
+  text-align: center;
+  width: 25%;
+  margin-left: 37%;
 }
   
   /* Add media queries for responsiveness. This will center both the text and the image inside the container */
   @media (max-width: 500px) {
     .container {
       text-align: center;
+      width: 90%;
     }
   
     .container img {
@@ -148,8 +149,8 @@ footer {
     }
     #map {
         margin: auto;
-        float: none;
         display: block;
+        width: 75%;
       }
     iframe {
         width: 300
