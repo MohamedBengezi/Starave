@@ -43,6 +43,18 @@ ul {
     
 }
 
+/* Footer styling */
+footer {
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  padding: 1rem;
+  background-color: #2d3944;
+  text-align: center;
+}
+
+
 .visit {
     float: right;
 }
