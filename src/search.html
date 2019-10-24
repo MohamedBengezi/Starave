@@ -22,6 +22,9 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
         crossorigin="anonymous"></script>
+    <script type="text/javascript" src="js/search.js"></script>
+    <script type="text/javascript" src="js/index.js"></script>
+
 </head>
 
 <body>
@@ -56,7 +59,7 @@
             </div>
         </nav>
     </header>
-    <form class="col-xs-4 col1 center-block w-100" action="results.html">
+    <form id="searchForm" class="col-xs-4 col1 center-block w-100" action="results.html">
         <!-- This section contains all the inputs required to do a specific search for clubs -->
         <div class="search-form">
             <div class="">
@@ -84,6 +87,8 @@
             </div>
             <br>
             <button class="btn btn-outline-success mt-2" type="submit">Find Clubs!</button>
+            OR
+            <button type="button" class="btn btn-outline-success mt-2" onclick="getLocation()">Find Clubs Near Me!</button>
     </form>
      <!-- The footer section -->
     <footer>

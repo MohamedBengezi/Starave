@@ -1,0 +1,2 @@
+var userLatitutde;
+var userLongitude;
