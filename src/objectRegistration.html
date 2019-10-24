@@ -19,6 +19,7 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
         crossorigin="anonymous"></script>
+    <script type="text/javascript" src="js/objectRegistration.js"></script>
 
 </head>
 
@@ -70,6 +71,7 @@
                     <input type="number" name="longitude" placeholder="Longitude" required="">
                     <input class="text" type="text" name="Description" placeholder="Description" required="">
 
+                    <input type="button" class="btn btn-outline-success mt-2 mb-2" onclick="getLocation()" value="Find Location">
 
                     <input type="submit" value="Add">
                 </form>
