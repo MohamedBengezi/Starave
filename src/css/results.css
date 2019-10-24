@@ -33,6 +33,11 @@ footer {
     background-color: #2d3944;
     text-align: center;
 }
+#map {
+  width: 100%;
+  height: 400px;
+  background-color: grey;
+}
   /*
    Add media queries for responsiveness. This will center both the text and the image inside the container */
   @media (max-width: 500px) {
