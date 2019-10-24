@@ -18,6 +18,7 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
         crossorigin="anonymous"></script>
+    <script type="text/javascript" src="js/userRegistration.js"></script>
 </head>
 
 <body>
@@ -57,13 +58,13 @@
         <h1>User Registration</h1>
         <div class="main-agileinfo col-75">
             <div class="agileits-top ">
-                <form action="#" method="post">
+                <form id="userRegistration" action="#" method="post">
                     <!-- All inputs for the form -->
-                    <input class="text" type="text" name="Username" placeholder="Username" required="">
-                    <input class="text email" type="email" name="email" placeholder="Email" required="">
-                    <input class="text" type="password" name="password" placeholder="Password" required="">
-                    <input class="text" type="password" name="password" placeholder="Confirm Password" required="">
-                    <input class="text" type="number" name="quantity" min="18" max="99" placeholder="Age">
+                    <input class="text" type="text" name="Username" placeholder="Username">
+                    <input class="text email" type="email" name="email" placeholder="Email">
+                    <input class="text" type="password" name="password" placeholder="Password">
+                    <input class="text" type="password" name="password" placeholder="Confirm Password">
+                    <input class="text" type="number" name="    " placeholder="Age">
                     <!-- Adding a label within the radio buttons to make the words clickable -->
                     <input type="radio" name="gender" value="male" id="male"><label class="gender" for="male">
                         Male</label> <br>
@@ -71,7 +72,7 @@
                         Female</label><br>
                     <input type="radio" name="gender" value="other" id="other"> <label class="gender" for="other">
                         Other</label>
-                    <input type="submit" value="SIGN UP">
+                    <input type="button" onclick="validateFormValues()" value="SIGN UP">
                 </form>
             </div>
         </div>

@@ -76,7 +76,7 @@ footer {
   }
 
   /* Submit button style */
-  input[type="submit"] {
+  input[type="button"] {
     font-size: .9em;
     color: #fff;
     background: #76b852;
