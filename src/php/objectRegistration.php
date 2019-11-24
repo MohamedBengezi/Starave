@@ -1,80 +1,35 @@
 <?php include "../../../inc/dbinfo.inc"; ?>
+<?php include "../../../inc/aws-s3.inc"; ?>
+<?php include "./helpers/functions.php"; ?>
 <?php
     session_start();
     // Check if session is a logged in one, if it isn't then redirect to login.
     if (!isset($_SESSION['ID'])){
         header("Location: userLogin.php");
     }
-?>
-<html>
-<head>
-    <title>Nightclub Review</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="../../lib/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="../css/objectRegistration.css" />
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-        crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
-        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
-        crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
-        crossorigin="anonymous"></script>
-    <script type="text/javascript" src="../js/objectRegistration.js"></script>
 
+
+?>
+<?php include "./header.php"; ?>
+    <script type="text/javascript" src="../js/objectRegistration.js"></script>
+    <link rel="stylesheet" type="text/css" href="../css/objectRegistration.css" />
 </head>
 <body>
-    <header> 
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark"> <!-- Navbar is created using bootstrap's template and contains 5 links -->
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav mr-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="../home.php"> <!-- This link will redirect the user to home page-->
-                            Home
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="../userRegistration.html">Register</a> <!-- This link will redirect the user to user registration page-->
-                    </li>
-                   <li class="nav-item">
-                        <a class="nav-link" href="../objectRegistration.html">Add Club</a> <!-- This link will redirect the user to club registration page-->
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="">Contact Us</a> <!-- This link will redirect the user to contact page. This page is not implemented yet. -->
-                    </li>
-                    <?php if (isset($_SESSION['ID'])) { ?>
-                           <a class="nav-link" href="helpers/logout.php">Logout</a>
-                    <?php } ?>
-                </ul>
-                <form class="form-inline my-2 my-lg-0" action="../search.html">
-                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button> <!-- This link will redirect the user to searhc page-->
-                </form>
-            </div>
-        </nav>
-    </header>
+   <?php include "./navigationMenu.php"; ?>
    <!-- Div for the user registration form -->
     <div class="main-w3layouts wrapper"> 
         <!-- This section contains all the input sections for all the inputs that are required to add a club to the database -->
         <h1>Club Registration</h1>
         <div class="main-agileinfo col-75">
             <div class="agileits-top ">
-               <form action="#" method="post">
+               <form action="<?php $_SERVER['PHP_SELF']; ?>" method="post" enctype="multipart/form-data">
                     <!-- All inputs for the form -->
-                    <input class="text" type="text" name="Username" placeholder="Club Name" required="">
+                    <input class="text" type="text" name="Club" placeholder="Club Name" required="">
                     <input type="number" name="rating" placeholder="Rating" required="" min="1" max="5">
-                    <input type="number" step="0.000000001" name="latitude" placeholder="Latitude" required="">
-                    <input type="number" step="0.000000001" name="longitude" placeholder="Longitude" required="">
+                    <input type="number" step="0.0000000000000001" name="latitude" placeholder="Latitude" required="">
+                    <input type="number" step="0.0000000000000001" name="longitude" placeholder="Longitude" required="">
                     <input class="text" type="text" name="Description" placeholder="Description" required="">
-
+                    <input type="file" name="image" placeholder="Image" required="">
                     <input type="button" class="btn btn-outline-success mt-2 mb-2" onclick="getLocation()" value="Find Location">
 
                     <input type="submit" value="Add">
@@ -84,20 +39,93 @@
 
     </div>
 
-    <!-- The footer section -->
-    <footer>
-            <a href="../../sitemap.xml">Sitemap</a> <!-- This is the footer that will be in all the pages -->
-    </footer> 
 <?php
+ /* Connect to MySQL and select the database. */
+    $pdo = new PDO('mysql:host='.DB_SERVER.';dbname='.DB_DATABASE, DB_USERNAME, DB_PASSWORD);
+    $pdo->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
+    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+     /* If input fields are populated, add a row to the EMPLOYEES table. */
+    $clubName = htmlentities($_POST['Club']);
+    $clubRating = htmlentities($_POST['rating']);
+    $clubLat = htmlentities($_POST['latitude']);
+    $clubLong = htmlentities($_POST['longitude']);
+    $clubDesc = htmlentities($_POST['Description']);
+    $clubImage = htmlentities($_FILES['image']['name']);
 
-  mysqli_free_result($result);
-  mysqli_close($connection);
+    if (strlen($clubName) || strlen($clubRating) || strlen($clubLat) || strlen($clubLong) || strlen($clubDesc) || strlen($clubImage)) {
+      AddClub($pdo, $clubName, $clubRating, $clubLat, $clubLong, $clubDesc, $clubImage);
+    } 
 
+        require 'vendor/autoload.php';
+        use Aws\S3\S3Client;
+        use Aws\S3\Exception\S3Exception;
+    if (isset($_FILES['image'])){
+        $bucketName = 'starave-club-images';
+        $filePath = $_FILES['image']['name'];
+        $temp_file_location = $_FILES['image']['tmp_name']; 
+        // Set Amazon S3 Credentials
+        $s3 = S3Client::factory(
+                array(
+                        'credentials' => array(
+                                'key' => $IAM_KEY,
+                                'secret' => $IAM_SECRET
+                        ),
+                        'version' => 'latest',
+                        'region'  => 'us-east-1'
+                )
+        );
+        try {
+                // So you need to move the file on $filePath to a temporary place.
+                // The solution being used: http://stackoverflow.com/questions/21004691/downloading-a-file-and-saving-it-locally-with-php
+                if (!file_exists('/tmp/tmpfile')) {
+                        mkdir('/tmp/tmpfile');
+                }
+
+                // Create temp file
+                $tempFilePath = $_FILES['image']['tmp_name'];
+        echo $tempFilePath;
+                // Put on S3
+                $s3->putObject(
+                        array(
+                                'Bucket'=>$bucketName,
+                                'Key' =>  $keyName,
+                                'SourceFile' => $temp_file_location,
+                                'StorageClass' => 'REDUCED_REDUNDANCY'
+                        )
+                );
+        } catch (S3Exception $e) {
+                echo $e->getMessage();
+        } catch (Exception $e) {
+                echo $e->getMessage();
+        }
+
+
+    }
+
+ 
+
+function AddClub($pdo, $clubName, $clubRating, $clubLat, $clubLong, $clubDesc, $clubImage) {
+
+   $query = "insert into clubs (ID, NAME, RATING, LATITUDE, LONGITUDE, DESCRIPTION, IMAGE) values (null,?, ?, ?, ?, ?, ?);";
+   $stmnt = $pdo->prepare($query);
+   try {
+            $stmnt->execute([$clubName, $clubRating, $clubLat, $clubLong, $clubDesc, $clubImage]);
+	    goHome();
+        } catch (PDOException $e) {
+            echo $e->getMessage(); 
+            echo "TESTING".$clubName;
+            header("Location: objectRegistration.php");
+            echo '<script>alert("This club already exists")</script>';
+            echo '<script>document.getElementsByName("Club")[0].value="',$clubName ,'"</script>';
+            echo '<script>document.getElementsByName("rating")[0].value="',$clubRating ,'"</script>';
+            echo '<script>document.getElementsByName("latitude")[0].value="',$clubLat ,'"</script>';
+            echo '<script>document.getElementsByName("longitude")[0].value="',$clubLong ,'"</script>';
+            echo '<script>document.getElementsByName("Description")[0].value="',$clubDesc ,'"</script>';
+         }
+
+}
+
+$pdo=null; //Closing connection
 ?>
 
-</body>
-</html>
-
-
-<?php
-?>     
+<?php include "./footer.php"; ?>    
