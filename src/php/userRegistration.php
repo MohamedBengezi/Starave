@@ -1,71 +1,11 @@
 <?php include "../../../inc/dbinfo.inc"; ?>
-<?php include "./helpers/printError.php"; ?>
-<?php
-    session_start();
-    // Check if session is a logged in one, if it isn't then redirect to login.
-    if (isset($_SESSION['ID'])){
-        header("Location: ../home.php");
-    }
-
-/* Connect to MySQL and select the database. */
-    $pdo = new PDO('mysql:host='.DB_SERVER.';dbname='.DB_DATABASE, DB_USERNAME, DB_PASSWORD);
-    $pdo->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
-    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
-  /* If input fields are populated, add a row to the EMPLOYEES table. */
-  $userName = htmlentities($_POST['Username']);
-  $userEmail = htmlentities($_POST['email']);
-  $userPassword = htmlentities($_POST['password']);
-  $userAge = htmlentities($_POST['age']);
-  $userGender = htmlentities($_POST['gender']);
-
-  $notEmpty = strlen($userName) || strlen($userEmail) || strlen($userPassword) || strlen($userAge) || strlen($userGender);
-
-  if ($notEmpty) {
-    AddUser($pdo, $userName, $userEmail, $userPassword, $userAge, $userGender);
-  }
-
-
-
-/* Add a user to the table. */
-function AddUser($pdo, $userName, $email,$password,$age,$gender) {
-
-   $query = "insert into user (ID, USERNAME, EMAIL, PASS, AGE, GENDER) values (null,?, ?, ?, ?, ?);";
-   $stmnt = $pdo->prepare($query);
-   try {
-            $stmnt->execute([$userName, $email,$password,$age,$gender]);
-
-    //When the sign up is successful, login the user automatically
-    $query= "Select * from user where EMAIL=? and PASS=?";
-    $stmnt = $pdo->prepare($query);
-    $stmnt->execute([$email,$password]);
-    $rows = $stmnt->fetchAll();
-
-        // If there is only one user
-        if (count($rows) == 1){
-
-            // Setting the session to the returned user ID.
-            $_SESSION['ID'] = $rows[0]['ID'];
-            // Redirect to table of users.
-           // header("Location: ../home.php");
-            printError("successfully logged in");
-            header("Location: ../home.php");
-
-        }
-        } catch (PDOException $e) {
-            echo '<script>alert("Please choose another username")</script>';
-            echo '<script>document.getElementsByName("Username")[0].value="',$userName ,'"</script>';
-            echo '<script>document.getElementsByName("email")[0].value="',$email ,'"</script>';
-            echo '<script>document.getElementsByName("age")[0].value="',$age ,'"</script>';
-            echo '<script>document.getElementById("',$gender,'").checked=true; </script>';
-
-         }
-
-	}
-	$pdo=null; //Closing connection
-?>
+<?php include "./helpers/functions.php"; ?>
 
 <?php include "./header.php"; ?>
+
+    <link rel="stylesheet" type="text/css" href="../css/userRegistration.css" />
+    <script type="text/javascript" src="../js/userRegistration.js"></script>
+</head>
 
 <body>
     <?php include "./navigationMenu.php"; ?>
@@ -95,5 +35,65 @@ function AddUser($pdo, $userName, $email,$password,$age,$gender) {
         </div>
 
     </div>
+
+<?php
+    session_start();
+    // Check if session is a logged in one, if it isn't then redirect to login.
+    if (isset($_SESSION['ID'])){
+        header("Location: ../home.php");
+    }
+
+/* Connect to MySQL and select the database. */
+    $pdo = new PDO('mysql:host='.DB_SERVER.';dbname='.DB_DATABASE, DB_USERNAME, DB_PASSWORD);
+    $pdo->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
+    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+  /* If input fields are populated, add a row to the EMPLOYEES table. */
+  $userName = htmlentities($_POST['Username']);
+  $userEmail = htmlentities($_POST['email']);
+  $userPassword = htmlentities($_POST['password']);
+  $userAge = htmlentities($_POST['age']);
+  $userGender = htmlentities($_POST['gender']);
+
+  $notEmpty = strlen($userName) || strlen($userEmail) || strlen($userPassword) || strlen($userAge) || strlen($userGender);
+
+  if ($notEmpty) {
+    AddUser($pdo, $userName, $userEmail, $userPassword, $userAge, $userGender);
+  }
+
+/* Add a user to the table. */
+function AddUser($pdo, $userName, $email,$password,$age,$gender) {
+
+   $query = "insert into user (ID, USERNAME, EMAIL, PASS, AGE, GENDER) values (null,?, ?, ?, ?, ?);";
+   $stmnt = $pdo->prepare($query);
+   try {
+            $stmnt->execute([$userName, $email,$password,$age,$gender]);
+
+    //When the sign up is successful, login the user automatically
+    $query= "Select * from user where EMAIL=? and PASS=?";
+    $stmnt = $pdo->prepare($query);
+    $stmnt->execute([$email,$password]);
+    $rows = $stmnt->fetchAll();
+
+        // If there is only one user
+        if (count($rows) == 1){
+
+            // Setting the session to the returned user ID.
+            $_SESSION['ID'] = $rows[0]['ID'];
+            // Redirect to table of users.
+            printError("successfully logged in");
+            goHome();
+
+        }
+        } catch (PDOException $e) {
+            alert("Please choose another username");
+            echo '<script>document.getElementsByName("Username")[0].value="',$userName ,'"</script>';
+            echo '<script>document.getElementsByName("email")[0].value="',$email ,'"</script>';
+            echo '<script>document.getElementsByName("age")[0].value="',$age ,'"</script>';
+            echo '<script>document.getElementById("',$gender,'").checked=true; </script>';
+         }
+        }
+        $pdo=null; //Closing connection
+?>
 
 <? php include "./footer.php"; ?>
