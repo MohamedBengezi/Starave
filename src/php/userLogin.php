@@ -84,22 +84,3 @@
 </body>
 </html>
 
-
-<?php
-
-/* Add an employee to the table. */
-function AddUser($connection, $userName, $email,$password,$age,$gender) {
-   $n = mysqli_real_escape_string($connection, $userName);
-   $e = mysqli_real_escape_string($connection, $email);
-   $p = mysqli_real_escape_string($connection, $password);
-   $a = mysqli_real_escape_string($connection, $age);
-   $g = mysqli_real_escape_string($connection, $gender);
-
-
-   $query = "insert into user (USERNAME, EMAIL, PASS, AGE, GENDER) VALUES ('$n', '$e', '$p', '$a', '$g');";
-
-   if(!mysqli_query($connection, $query)) echo("<p>Error adding user data.</p>");
-}
-
-?>
-

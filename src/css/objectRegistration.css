@@ -45,12 +45,12 @@ footer {
     bottom: 0;
     left: 0;
     padding: 1rem;
-    background-color: #2d3944;
+    background-color: #22282a;
     text-align: center;
 }
   
   /* Styling for most of the input fields */
-  input[type="text"], input[type="email"], input[type="password"], input[type="number"] {
+  input[type="text"], input[type="email"], input[type="password"], input[type="number"], input[type="file"] {
     font-size: 0.9em;
     color: #fff;
     font-weight: 100;

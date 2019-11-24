@@ -50,7 +50,7 @@
                 <a class="nav-link" href="php/helpers/login.php">Login</a>
           <?php } ?>
         </ul>
-        <form class="form-inline my-2 my-lg-0" action="search.html">
+        <form class="form-inline my-2 my-lg-0" action="php/search.php">
           <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button> <!-- This link will redirect the user to searhc page-->
         </form>
       </div>

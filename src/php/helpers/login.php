@@ -8,28 +8,28 @@
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
     if (isset($_POST['email']) && isset($_POST['password'])){
+        $email = test_input($_POST['email']);
+        $pass = test_input($_POST['password']);
 
         // Query we are using to check if the user is legit
         $sql = "Select * from user where EMAIL=? and PASS=?";
-
         // Prepared statements: For when we don't have all the parameters so we store a template to be executed
         // More information here: https://www.w3schools.com/php/php_mysql_prepared_statements.asp
         $stmnt = $pdo->prepare($sql);
         try {
-            $stmnt->execute([$_POST['email'], $_POST['password']]);
+            $stmnt->execute([$email, $pass]);
         } catch (PDOException $e) {
             echo $e->getMessage();
         }
 
         // For getting data from the query to submitted above.
         $rows = $stmnt->fetchAll();
-
         // If there is only one user
         if (count($rows) == 1){
             // Setting the session to the returned user ID.
             $_SESSION['ID'] = $rows[0]['ID'];
             // Redirect to table of users.
-            header("Location: ../objectRegistration.php");
+            header("Location: ../../home.php");
         } else {
             header("Location: ../../userLogin.php");
         }
