@@ -122,8 +122,12 @@ function AddUser($pdo, $userName, $email,$password,$age,$gender) {
    try {
             $stmnt->execute([$userName, $email,$password,$age,$gender]);
         } catch (PDOException $e) {
-            echo $e->getMessage();
-            echo '<script>alert("hacked")</script>';
+            echo '<script>alert("Please choose another username")</script>';
+	    echo '<script>document.getElementsByName("Username")[0].value="',$userName ,'"</script>';
+            echo '<script>document.getElementsByName("email")[0].value="',$email ,'"</script>';
+            echo '<script>document.getElementsByName("age")[0].value="',$age ,'"</script>';
+            echo '<script>document.getElementById("',$gender,'").checked=true; </script>';
+
 	 }
 
 }
