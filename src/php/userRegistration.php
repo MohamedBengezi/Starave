@@ -6,43 +6,7 @@
         header("Location: ../home.php");
     }
 ?>
-<?php
 
- /* Connect to MySQL and select the database. */
-    $pdo = new PDO('mysql:host='.DB_SERVER.';dbname='.DB_DATABASE, DB_USERNAME, DB_PASSWORD);
-    $pdo->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
-    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
-  /* If input fields are populated, add a row to the EMPLOYEES table. */
-  $userName = htmlentities($_POST['Username']);
-  $userEmail = htmlentities($_POST['email']);
-  $userPassword = htmlentities($_POST['password']);
-  $userAge = htmlentities($_POST['age']);
-  $userGender = htmlentities($_POST['gender']);
-
-
-  if (strlen($userName) || strlen($userEmail) || strlen($userPassword) || strlen($userAge) || strlen($userGender)) {
-    AddUser($pdo, $userName, $userEmail, $userPassword, $userAge, $userGender);
-  }
-
-
-
-/* Add an employee to the table. */
-function AddUser($pdo, $userName, $email,$password,$age,$gender) {
-
-   $query = "insert into user (ID, USERNAME, EMAIL, PASS, AGE, GENDER) values (null,?, ?, ?, ?, ?);";
-   $stmnt = $pdo->prepare($query);
-   try {
-            $stmnt->execute([$userName, $email,$password,$age,$gender]);
-        } catch (PDOException $e) {
-            echo $e->getMessage();
-        }
-
-}
-$pdo=null; //Closing connection
-//header("Location: ../userRegistration.php");
-
-?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -128,5 +92,45 @@ $pdo=null; //Closing connection
     <footer>
         <a href="../sitemap.xml">Sitemap</a>
     </footer> >
+
+<?php
+
+ /* Connect to MySQL and select the database. */
+    $pdo = new PDO('mysql:host='.DB_SERVER.';dbname='.DB_DATABASE, DB_USERNAME, DB_PASSWORD);
+    $pdo->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
+    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+  /* If input fields are populated, add a row to the EMPLOYEES table. */
+  $userName = htmlentities($_POST['Username']);
+  $userEmail = htmlentities($_POST['email']);
+  $userPassword = htmlentities($_POST['password']);
+  $userAge = htmlentities($_POST['age']);
+  $userGender = htmlentities($_POST['gender']);
+
+
+  if (strlen($userName) || strlen($userEmail) || strlen($userPassword) || strlen($userAge) || strlen($userGender)) {
+    AddUser($pdo, $userName, $userEmail, $userPassword, $userAge, $userGender);
+  }
+
+
+
+/* Add an employee to the table. */
+function AddUser($pdo, $userName, $email,$password,$age,$gender) {
+
+   $query = "insert into user (ID, USERNAME, EMAIL, PASS, AGE, GENDER) values (null,?, ?, ?, ?, ?);";
+   $stmnt = $pdo->prepare($query);
+   try {
+            $stmnt->execute([$userName, $email,$password,$age,$gender]);
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+            echo '<script>alert("hacked")</script>';
+	 }
+
+}
+$pdo=null; //Closing connection
+//header("Location: ../userRegistration.php");
+
+?>
+
 </body>
 </html>
