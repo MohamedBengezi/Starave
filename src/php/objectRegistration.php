@@ -18,42 +18,73 @@
 <?php
 $nameErr = $ratingErr = $latErr = $longErr = $descErr = $imgErr = "";
 $clubName = $clubRating = $clubLat = $clubLong = $clubDesc = $clubImage = "";
+$error = 0;
 
 if (empty($_POST['Club'])) {
+  $error = 1;
   $nameErr = "Club name is required";
 } else {
   $clubName = test_input($_POST['Club']);
 }
 
 if (empty($_POST["rating"])) {
+  $error = 1;
   $ratingErr = "Rating is required";
 } else {
   $clubRating = test_input($_POST['rating']);
 }
 
 if (empty($_POST["latitude"])) {
+  $error = 1;
    $latErr = "Latitude is required";
 } else {
   $clubLat = test_input($_POST['latitude']);
 }
 
 if (empty($_POST["longitude"])) {
+  $error = 1;
   $longErr = "Longitude is required";
 } else {
   $clubLong = test_input($_POST['longitude']);
 }
 
 if (empty($_POST["Description"])) {
+  $error = 1;
   $descErr = "Description is required";
 } else {
   $clubDesc = test_input($_POST["Description"]);
 }
 
 if (empty($_FILES['image']['name'])) {
+  $error = 1;
   $imgErr = "Image is required";
 } else {
   $clubImage = $_FILES['image']['name'];
 }
+
+$pdo1 = new PDO('mysql:host='.DB_SERVER.';dbname='.DB_DATABASE, DB_USERNAME, DB_PASSWORD);
+$pdo1->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
+$pdo1->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+
+if (!$error) {
+    $sql = "select * from clubs where (NAME=?);";
+    $stmnt = $pdo1 -> prepare($sql);
+    $stmnt -> execute([$clubName]);
+    $rows = $stmnt -> fetchAll();
+
+
+    if (count($rows) > 0) {
+        foreach ($rows as $row ){
+            if ($clubName==$row['NAME'])
+            {
+                $nameErr = "Club is already registered";
+            }
+        }
+        $error = 1;
+    }
+}
+$pdo1 = null;
 
 ?>
    <!-- Div for the user registration form -->
@@ -92,20 +123,21 @@ if (empty($_FILES['image']['name'])) {
 
 <?php
 
+    require 'vendor/autoload.php';
+    use Aws\S3\S3Client;
+    use Aws\S3\Exception\S3Exception;
+
  /* Connect to MySQL and select the database. */
     $pdo = new PDO('mysql:host='.DB_SERVER.';dbname='.DB_DATABASE, DB_USERNAME, DB_PASSWORD);
     $pdo->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-     /* If input fields are populated, add a row to the EMPLOYEES table. */
-  
-    if ((strlen($clubName) || strlen($clubRating) || strlen($clubLat) || strlen($clubLong) || strlen($clubDesc)) && !empty($_FILES['image']['name'])) {
-        AddClub($pdo, $clubName, $clubRating, $clubLat, $clubLong, $clubDesc, $clubImage);
-    } 
 
-        require 'vendor/autoload.php';
-        use Aws\S3\S3Client;
-        use Aws\S3\Exception\S3Exception;
-    if (isset($_FILES['image']) && !empty($_FILES['image']['name'])){
+    $notEmpty = strlen($clubName) || strlen($clubRating) || strlen($clubLat) || strlen($clubLong) || strlen($clubDesc);
+
+    if (notEmpty && !empty($_FILES['image']['name']) && !$error) {
+        AddClub($pdo, $clubName, $clubRating, $clubLat, $clubLong, $clubDesc, $clubImage);
+
+    if (isset($_FILES['image'])){
         $bucketName = 'starave-club-images';
         $filePath = $_FILES['image']['name'];
         $keyName = basename($filePath);
@@ -147,7 +179,7 @@ if (empty($_FILES['image']['name'])) {
 
 
     }
-
+}
  
 
 function AddClub($pdo, $clubName, $clubRating, $clubLat, $clubLong, $clubDesc, $clubImage) {

@@ -17,38 +17,86 @@
 <body>
     <?php include "./navigationMenu.php"; ?>
 <?php
-$nameErr = $emailErr = $passErr = $ageErr = $genderErr = "";
+$nameErr = $emailErr = $passErr  = $ageErr = $genderErr = "";
 $userName = $userEmail = $userPassword = $userAge = $userGender = "";
-
+$error = 0;
 if (empty($_POST['Username'])) {
+  $error = 1;
   $nameErr = "Username is required";
 } else {
   $userName = test_input($_POST['Username']);
 }
 
 if (empty($_POST["email"])) {
+  $error = 1;
   $emailErr = "Email is required";
 } else {
   $userEmail = test_input($_POST['email']);
 }
 
 if (empty($_POST["password"])) {
+  $error = 1;
    $passErr = "Password is required";
 } else {
   $userPassword = test_input($_POST['password']);
 }
 
+if (empty($_POST["repassword"])) {
+  $error = 1;
+   $passErr = "Password is required";
+} else {
+  if (!empty($_POST["password"]) && ($_POST["repassword"] != $_POST["password"])) { 
+      $error = 1;
+      $passErr = "Passwords do not match";
+  } else {
+      $userRepassword = test_input($_POST['repassword']);
+  }
+}
+
 if (empty($_POST["age"])) {
+  $error = 1;
   $ageErr = "Age is required";
 } else {
   $userAge = test_input($_POST['age']);
 }
 
 if (empty($_POST["gender"])) {
+  $error = 1;
   $genderErr = "Gender is required";
 } else {
   $userGender = test_input($_POST["gender"]);
 }
+
+    $pdo1 = new PDO('mysql:host='.DB_SERVER.';dbname='.DB_DATABASE, DB_USERNAME, DB_PASSWORD);
+    $pdo1->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
+    $pdo1->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+
+    //When the sign up is successful, login the user automatically
+
+
+    if (!$error) {
+        $sql = "select * from user where (EMAIL=? or USERNAME=?);";
+        $stmnt = $pdo1 -> prepare($sql);
+        $stmnt -> execute([$userEmail, $userName]);
+        $rows = $stmnt -> fetchAll();
+
+
+        if (count($rows) > 0) {
+            foreach ($rows as $row ){
+                if ($userName==$row['USERNAME'])
+                {
+                    $nameErr = "Username is in use";
+                }
+                if ($userEmail==$row['EMAIL'])
+                {
+                    $emailErr = "Email is in use";
+                }
+            }
+	    $error = 1;
+        }
+    }
+$pdo1 = null;
 
 $notEmpty = strlen($userName) || strlen($userEmail) || strlen($userPassword) || strlen($userAge) || strlen($userGender);
 
@@ -67,7 +115,7 @@ $notEmpty = strlen($userName) || strlen($userEmail) || strlen($userPassword) || 
                     <span class="error" style="color:#FFFFFF;"> <?php echo $emailErr;?></span>
 
                     <input class="text" type="password" name="password" placeholder="Password">
-                    <input class="text" type="password" name="password" placeholder="Confirm Password">
+                    <input class="text" type="password" name="repassword" placeholder="Confirm Password">
                     <span class="error" style="color:#FFFFFF;"><?php echo $passErr;?></span>
 
                     <input class="text" type="number" name="age" placeholder="Age">
@@ -100,7 +148,10 @@ $notEmpty = strlen($userName) || strlen($userEmail) || strlen($userPassword) || 
     $pdo->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-  if ($notEmpty) {
+
+    //When the sign up is successful, login the user automatically
+
+  if ($notEmpty && !$error) {
     AddUser($pdo, $userName, $userEmail, $userPassword, $userAge, $userGender);
   }
 
