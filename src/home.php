@@ -58,7 +58,7 @@
   </header>
   <footer>
     <a href="../sitemap.xml">Sitemap</a> <!-- This is the footer that will be in all the pages -->
-  </footer> >
+  </footer> 
 </body>
 </html>
 
