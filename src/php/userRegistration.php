@@ -1,15 +1,58 @@
 <?php include "../../../inc/dbinfo.inc"; ?>
 <?php include "./helpers/functions.php"; ?>
-
 <?php include "./header.php"; ?>
+<?php 
+    session_start();
+    // Check if session is a logged in one, if it is then redirect to login.
+    if (isset($_SESSION['ID'])){
+        header("Location: ../home.php");
+    }
+?>
+
 
     <link rel="stylesheet" type="text/css" href="../css/userRegistration.css" />
-    <script type="text/javascript" src="../js/userRegistration.js"></script>
+   <!-- <script type="text/javascript" src="../js/userRegistration.js"></script> -->
 </head>
 
 <body>
     <?php include "./navigationMenu.php"; ?>
+<?php
+$nameErr = $emailErr = $passErr = $ageErr = $genderErr = "";
+$userName = $userEmail = $userPassword = $userAge = $userGender = "";
 
+if (empty($_POST['Username'])) {
+  $nameErr = "Username is required";
+} else {
+  $userName = test_input($_POST['Username']);
+}
+
+if (empty($_POST["email"])) {
+  $emailErr = "Email is required";
+} else {
+  $userEmail = test_input($_POST['email']);
+}
+
+if (empty($_POST["password"])) {
+   $passErr = "Password is required";
+} else {
+  $userPassword = test_input($_POST['password']);
+}
+
+if (empty($_POST["age"])) {
+  $ageErr = "Age is required";
+} else {
+  $userAge = test_input($_POST['age']);
+}
+
+if (empty($_POST["gender"])) {
+  $genderErr = "Gender is required";
+} else {
+  $userGender = test_input($_POST["gender"]);
+}
+
+$notEmpty = strlen($userName) || strlen($userEmail) || strlen($userPassword) || strlen($userAge) || strlen($userGender);
+
+?>
     <!-- Div for the user registration form -->
     <div class="main-w3layouts wrapper">
         <h1>User Registration</h1>
@@ -18,18 +61,27 @@
                 <form id="userRegistration" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post">
                     <!-- All inputs for the form -->
                     <input class="text" type="text" name="Username" placeholder="Username">
+                    <span class="error" style="color:#FFFFFF;"><?php echo $nameErr;?></span>
+                    
                     <input class="text email" type="email" name="email" placeholder="Email">
+                    <span class="error" style="color:#FFFFFF;"> <?php echo $emailErr;?></span>
+
                     <input class="text" type="password" name="password" placeholder="Password">
                     <input class="text" type="password" name="password" placeholder="Confirm Password">
+                    <span class="error" style="color:#FFFFFF;"><?php echo $passErr;?></span>
+
                     <input class="text" type="number" name="age" placeholder="Age">
+                    <span class="error" style="color:#FFFFFF;"> <?php echo $ageErr;?></span><br/>
+
                     <!-- Adding a label within the radio buttons to make the words clickable -->
                     <input type="radio" name="gender" value="male" id="male"><label class="gender" for="male">
                         Male</label> <br>
                     <input type="radio" name="gender" value="female" id="female"> <label class="gender" for="female">
                         Female</label><br>
                     <input type="radio" name="gender" value="other" id="other"> <label class="gender" for="other">
-                        Other</label>
-                    <input type="button" onclick="validateFormValues()" value="SIGN UP">
+                        Other</label><br/>
+                    <span class="error" style="color:#FFFFFF;"> <?php echo $genderErr;?></span>
+                    <input type="submit"  value="SIGN UP">
                 </form>
             </div>
         </div>
@@ -38,7 +90,7 @@
 
 <?php
     session_start();
-    // Check if session is a logged in one, if it isn't then redirect to login.
+    // Check if session is a logged in one, if it is then redirect to login.
     if (isset($_SESSION['ID'])){
         header("Location: ../home.php");
     }
@@ -47,15 +99,6 @@
     $pdo = new PDO('mysql:host='.DB_SERVER.';dbname='.DB_DATABASE, DB_USERNAME, DB_PASSWORD);
     $pdo->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
-  /* If input fields are populated, add a row to the EMPLOYEES table. */
-  $userName = htmlentities($_POST['Username']);
-  $userEmail = htmlentities($_POST['email']);
-  $userPassword = htmlentities($_POST['password']);
-  $userAge = htmlentities($_POST['age']);
-  $userGender = htmlentities($_POST['gender']);
-
-  $notEmpty = strlen($userName) || strlen($userEmail) || strlen($userPassword) || strlen($userAge) || strlen($userGender);
 
   if ($notEmpty) {
     AddUser($pdo, $userName, $userEmail, $userPassword, $userAge, $userGender);
@@ -86,13 +129,21 @@ function AddUser($pdo, $userName, $email,$password,$age,$gender) {
 
         }
         } catch (PDOException $e) {
-            alert("Please choose another username");
+            echo $e->getMessage();
             echo '<script>document.getElementsByName("Username")[0].value="',$userName ,'"</script>';
             echo '<script>document.getElementsByName("email")[0].value="',$email ,'"</script>';
             echo '<script>document.getElementsByName("age")[0].value="',$age ,'"</script>';
             echo '<script>document.getElementById("',$gender,'").checked=true; </script>';
          }
-        }
+ }
+
+function test_input($data) {
+    $data = trim($data);
+    $data = stripslashes($data);
+    $data = htmlspecialchars($data);
+    return $data;
+}
+        $_POST = array();
         $pdo=null; //Closing connection
 ?>
 
