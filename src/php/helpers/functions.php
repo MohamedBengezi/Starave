@@ -14,5 +14,9 @@
 		echo '<script>window.location.replace("https://starave.club/src/home.php");</script>';
 		// header("Location: ../home.php");
 	}
+	function showResults(){
+                echo '<script>window.location.replace("https://starave.club/src/php/results.php");</script>';
+                // header("Location: ../home.php");
+        }
 ?>
 

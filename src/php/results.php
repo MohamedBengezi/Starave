@@ -1,38 +1,43 @@
-<?php include "../../../inc/dbinfo.inc"; ?>
+<?php include "./helpers/functions.php"; ?>
 <?php
- /* Connect to MySQL and select the database. */
-    $pdo = new PDO('mysql:host='.DB_SERVER.';dbname='.DB_DATABASE, DB_USERNAME, DB_PASSWORD);
-    $pdo->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
-    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+	session_start();
+   	
+	$rows = $_SESSION['rows'];
+	$number = count($rows);
 
-    $clubName = htmlentities($_POST['clubName']);
-    $Lat = htmlentities($_POST['latitude']);
-    $Long = htmlentities($_POST['longitude']);
-    $clubRating = htmlentities($_POST['rating']);
-
-    if (empty($clubName) || empty($Lat) || empty($Long) || empty($clubRating)){
-        $make = '<h4>One or more fields are not filled in</h4>';
-    } else {
-        $make = '<h4>No match found!</h4>';
-        $sele = "SELECT * FROM clubs WHERE name LIKE '%$name%'";
-        $result = mysql_query($sele);
-
-        if ($mak = mysql_num_rows($result) > 0) {
-            while ($row = mysql_fetch_assoc($result)) {
-                echo '<h4> Id						: '.$row['id'];
-                echo '<br> name						: '.$row['name'];
-                echo '</h4>';
-            }
-        } else {
-            echo'<h2> Search Result</h2>';
-            print($make);
-        }
-        mysql_free_result($result);
-        mysql_close($conn);
-    }
-
-
-
-
-
+			
+       
+	
+	printError("In results.php");
+	printError($number);
 ?>
+<?php include "./header.php" ?>
+<link rel="stylesheet" type="text/css" href="../css/results.css" />
+</head>
+
+<body>
+	<?php include "./navigationMenu.php"; ?>
+	<!-- This div contains each object in the search results page-->
+    	<div class="search-results h-100">
+        	<div class="list-group h-100">
+
+            	<!-- Club object -->
+		<?php 
+			for($i=0; $i<$number; $i++){
+				$name = $rows[$i]['NAME'];
+    				printError($name);
+
+
+			}
+		?>
+                 	
+<a class="list-group-item list-group-item-action flex-column align-items-start h-100">
+                <div id="map"></div>
+                <script type="text/javascript" src="../js/results.js"> </script>
+                <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDp09JfPFgRPWolTTBxqgBbJHbeqOc5Mak&callback=initMap">
+                </script>
+            </a>
+	</div>
+	</div>
+<?php include "./footer.php"; ?>
+
