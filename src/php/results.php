@@ -1,10 +1,50 @@
 <?php include "./helpers/functions.php"; ?>
+<?php include "../../../inc/aws-s3.inc"; ?>
 <?php
-	session_start();
-   	
-	$rows = $_SESSION['rows'];
-	$number = count($rows);
+    session_start();
+    require 'vendor/autoload.php';
+    use Aws\S3\S3Client;
+    use Aws\S3\Exception\S3Exception;
 
+        // Set Amazon S3 Credentials
+    $s3 = S3Client::factory(
+            array(
+                    'credentials' => array(
+                            'key' => KEY,
+                            'secret' => SECRET
+                    ),
+                    'version' => 'latest',
+                    'region'  => 'us-east-1'
+            )
+    );
+
+    $rows = $_SESSION['rows'];
+    $number = count($rows);
+
+    $bucketName = 'starave-club-images';
+    $keyName = $rows[0]['IMAGE'];
+
+    try {
+        // So you need to move the file on $filePath to a temporary place.
+        // The solution being used: http://stackoverflow.com/questions/21004691/downloading-a-file-and-saving-it-locally-with-php
+
+        // Get image from S3
+        $result = $s3->getCommand('GetObject',
+               array(
+                  'Bucket'=>$bucketName,
+                  'Key' =>  $keyName,
+               )
+        );
+        $request = $s3->createPresignedRequest($result, '+10 minutes');
+
+        //Get the pre-signed URL
+        $signedUrl = (string) $request->getUri();
+        $imageData = base64_encode(file_get_contents($signedUrl));
+    } catch (S3Exception $e) {
+            echo $e->getMessage();
+    } catch (Exception $e) {
+            echo $e->getMessage();
+    }
 			
        
 	
@@ -26,7 +66,7 @@
 			for($i=0; $i<$number; $i++){
 				$name = $rows[$i]['NAME'];
     				printError($name);
-
+                                printError($i);
            
             echo '<a href="./clubs/modrn.html" class="list-group-item list-group-item-action flex-column align-items-start h-100">';
             echo '   <div class="d-flex w-100 justify-content-between">';
@@ -34,7 +74,7 @@
             echo '    </div>';
             echo '    <!-- Adding an image of the club -->';
             echo '    <div>';
-            echo '        <img class="club-image" src="',$rows[$i]['IMAGE'],'" alt="Modrn Thumbnail" />';
+            echo '        <img class="club-image" alt="Modrn Thumbnail" src="data:image/jpeg;base64,'.$imageData.'">';
             echo '    </div>';
             echo '    <div class="desc mr-5">';
             echo '        <p class="mb-1">',$rows[$i]['DESCRIPTION'],'</p>';
@@ -51,11 +91,11 @@
             echo "    <!-- using font-awesome library to display the star ratings -->";
             echo '    <div class="rating mr-3">';
 	    $numberOfStars=$rows[$i]['RATING'];
-	    for($i=0; $i<$numberOfStars; $i++){
+	    for($k=0; $k<$numberOfStars; $k++){
             	echo '        <span class="fa fa-star checked"></span>';
 	    }
 	    $noStars=5-$numberOfStars;
-	    for($i=0; $i<$noStars; $i++){
+	    for($m=0; $m<$noStars; $m++){
            	 echo '        <span class="fa fa-star"></span>';                
             }
             echo "     </div>";
