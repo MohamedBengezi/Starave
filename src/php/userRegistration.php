@@ -108,27 +108,27 @@ $notEmpty = strlen($userName) || strlen($userEmail) || strlen($userPassword) || 
             <div class="agileits-top ">
                 <form id="userRegistration" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post">
                     <!-- All inputs for the form -->
-                    <input class="text" type="text" name="Username" placeholder="Username">
                     <span class="error" style="color:#FFFFFF;"><?php echo $nameErr;?></span>
+                    <input class="text" type="text" name="Username" placeholder="Username">
                     
-                    <input class="text email" type="email" name="email" placeholder="Email">
                     <span class="error" style="color:#FFFFFF;"> <?php echo $emailErr;?></span>
+                    <input class="text email" type="email" name="email" placeholder="Email">
 
+                    <span class="error" style="color:#FFFFFF;"><?php echo $passErr;?></span>
                     <input class="text" type="password" name="password" placeholder="Password">
                     <input class="text" type="password" name="repassword" placeholder="Confirm Password">
-                    <span class="error" style="color:#FFFFFF;"><?php echo $passErr;?></span>
 
-                    <input class="text" type="number" name="age" placeholder="Age">
                     <span class="error" style="color:#FFFFFF;"> <?php echo $ageErr;?></span><br/>
+                    <input class="text" type="number" name="age" placeholder="Age">
 
                     <!-- Adding a label within the radio buttons to make the words clickable -->
+                    <span class="error" style="color:#FFFFFF;"> <?php echo $genderErr;?></span><br/>
                     <input type="radio" name="gender" value="male" id="male"><label class="gender" for="male">
                         Male</label> <br>
                     <input type="radio" name="gender" value="female" id="female"> <label class="gender" for="female">
                         Female</label><br>
                     <input type="radio" name="gender" value="other" id="other"> <label class="gender" for="other">
                         Other</label><br/>
-                    <span class="error" style="color:#FFFFFF;"> <?php echo $genderErr;?></span>
                     <input type="submit"  value="SIGN UP">
                 </form>
             </div>

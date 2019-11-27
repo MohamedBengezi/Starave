@@ -95,24 +95,24 @@ $pdo1 = null;
             <div class="agileits-top ">
                <form action="<?php $_SERVER['PHP_SELF']; ?>" method="post" enctype="multipart/form-data">
                     <!-- All inputs for the form -->
-                    <input class="text" type="text" name="Club" placeholder="Club Name" >
                     <span class="error" ><?php echo $nameErr;?></span>
+                    <input class="text" type="text" name="Club" placeholder="Club Name" >
 
-                    <input type="number" name="rating" placeholder="Rating" min="1" max="5">
                     <span class="error" ><?php echo $ratingErr;?></span>
+                    <input type="number" name="rating" placeholder="Rating" min="1" max="5">
 
-                    <input type="number" step="0.0000000000000001" name="latitude" placeholder="Latitude" >
                     <span class="error" ><?php echo $latErr;?></span>
+                    <input type="number" step="0.0000000000000001" name="latitude" placeholder="Latitude" >
 
-                    <input type="number" step="0.0000000000000001" name="longitude" placeholder="Longitude" >
                     <span class="error" ><?php echo $longErr;?></span>
+                    <input type="number" step="0.0000000000000001" name="longitude" placeholder="Longitude" >
 
-                    <input class="text" type="text" name="Description" placeholder="Description" >
                     <span class="error" ><?php echo $descErr;?></span>
+                    <input class="text" type="text" name="Description" placeholder="Description" >
 
-                    <input type="file" name="image" placeholder="Image" >
+                    <span class="error" ><?php echo $imgErr;?></span><br/>
+                    <input type="file" name="image" placeholder="Image" accept="image/jpeg,image/jpg">
                     <input type="button" class="btn btn-outline-success mt-2 mb-2" onclick="getLocation()" value="Find Location">
-                    <span class="error" ><?php echo $imgErr;?></span>
 
                     <input type="submit" value="Add">
                 </form>
