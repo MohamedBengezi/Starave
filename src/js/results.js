@@ -1,17 +1,12 @@
 // Initialize and add the map
 function initMap() {
     // The location of each club
-    var hamilton = { lat: 43.255016, lng: -79.868050 };
-    var modrn = { lat: 43.2584358, lng: -79.877296 };
-    var dd = { lat: 43.256571, lng: -79.8670827 };
-    var trust = { lat: 43.2584397, lng: -79.8794847 };
-    // The map, centered at a location on main st
+    var center = { lat: parseFloat(userLocation[0]), lng: parseFloat(userLocation[1]) };
+    var numClubs = clubLocations.length;
+  
+    var clubCoords;
     var map = new google.maps.Map(
-        document.getElementById('map'), { zoom: 13, center: hamilton });
-    // The markers, positioned at each club defined above
-    var mdrnMarker = new google.maps.Marker({ position: modrn, map: map });
-    var ddMarker = new google.maps.Marker({ position: dd, map: map });
-    var trustMarker = new google.maps.Marker({ position: trust, map: map });
+        document.getElementById('map'), { zoom: 9, center: center });
 
     //A sample description to display in the label
     var contentString = '<div id="content">' +
@@ -33,17 +28,15 @@ function initMap() {
         content: contentString
     });
 
-    //On click of the modrn marker, open the infowindow
-    mdrnMarker.addListener('click', function () {
-        infowindow.open(map, mdrnMarker);
-    });
+    //
+    for (var i=0; i < numClubs; i++){
+        clubCoords = { lat: clubLocations[i][0], lng: clubLocations[i][1] };
+//        markerList.push(new google.maps.Marker({ position: clubCoords, map: map });)
+        clubMarker = new google.maps.Marker({ position: clubCoords, map: map });
+        clubMarker.addListener('click', function () {
+            infowindow.open(map, clubMarker);
+        });
+        
+    }
 
-    //On click of the dd marker, open the infowindow
-    ddMarker.addListener('click', function () {
-        infowindow.open(map, ddMarker);
-    });
-    //On click of the trust marker, open the infowindow
-    trustMarker.addListener('click', function () {
-        infowindow.open(map, trustMarker);
-    });
 }

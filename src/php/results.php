@@ -21,8 +21,12 @@
     $rows = $_SESSION['rows'];
     $number = count($rows);
 
+    $userLocation = $_SESSION['userLocation'];
+    $clubLocations = [];
+
     $bucketName = 'starave-club-images';
     $keyName = $rows[0]['IMAGE'];
+    
 
     try {
         // So you need to move the file on $filePath to a temporary place.
@@ -41,15 +45,10 @@
         $signedUrl = (string) $request->getUri();
         $imageData = base64_encode(file_get_contents($signedUrl));
     } catch (S3Exception $e) {
-            echo $e->getMessage();
+           printError($e->getMessage());
     } catch (Exception $e) {
-            echo $e->getMessage();
+            printError($e->getMessage());
     }
-			
-       
-	
-	printError("In results.php");
-	printError($number);
 ?>
 <?php include "./header.php" ?>
 <link rel="stylesheet" type="text/css" href="../css/results.css" />
@@ -63,12 +62,11 @@
 
             	<!-- Club object -->
 		<?php 
-			for($i=0; $i<$number; $i++){
-				$name = $rows[$i]['NAME'];
-    				printError($name);
-                                printError($i);
-           
-            echo '<a href="./clubs/modrn.html" class="list-group-item list-group-item-action flex-column align-items-start h-100">';
+            echo "<script> var clubLocations = [];var userLocation = [",$userLocation[0],",",$userLocation[1],"]</script>";
+			for($i=0; $i<$number; $i++){ 
+            echo "<script> var latLng = []; latLng.push(",$rows[$i]['LATITUDE'],"); latLng.push(",$rows[$i]['LONGITUDE'],");</script>";
+            echo "<script> clubLocations.push(latLng);</script>";
+            echo '<a href="showObjects.php?id=',$rows[$i]['ID'],'&index=',$i,'" class="list-group-item list-group-item-action flex-column align-items-start h-100">';
             echo '   <div class="d-flex w-100 justify-content-between">';
             echo '       <h5 class="mb-1 ml-3">',$rows[$i]['NAME'],'</h5>';
             echo '    </div>';
@@ -105,8 +103,10 @@
 <a class="list-group-item list-group-item-action flex-column align-items-start h-100">
                 <div id="map"></div>
                 <script type="text/javascript" src="../js/results.js"> </script>
-                <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDp09JfPFgRPWolTTBxqgBbJHbeqOc5Mak&callback=initMap">
-                </script>
+		<?php 
+                echo '<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDp09JfPFgRPWolTTBxqgBbJHbeqOc5Mak&callback=initMap">';
+                ?>
+		</script>
             </a>
 	</div>
 	</div>
