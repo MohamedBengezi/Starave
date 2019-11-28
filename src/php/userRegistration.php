@@ -5,7 +5,7 @@
     session_start();
     // Check if session is a logged in one, if it is then redirect to login.
     if (isset($_SESSION['ID'])){
-        header("Location: ../home.php");
+        header("Location: ../php/home.php");
     }
 ?>
 
@@ -140,7 +140,7 @@ $notEmpty = strlen($userName) || strlen($userEmail) || strlen($userPassword) || 
     session_start();
     // Check if session is a logged in one, if it is then redirect to login.
     if (isset($_SESSION['ID'])){
-        header("Location: ../home.php");
+        header("Location: ../php/home.php");
     }
 
 /* Connect to MySQL and select the database. */
