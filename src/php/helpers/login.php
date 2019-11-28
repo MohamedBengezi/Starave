@@ -28,8 +28,9 @@
         if (count($rows) == 1){
             // Setting the session to the returned user ID.
             $_SESSION['ID'] = $rows[0]['ID'];
+            $_SESSION['USERNAME'] = $rows[0]['USERNAME'];
             // Redirect to table of users.
-            header("Location: ../../home.php");
+            header("Location: ../../php/home.php");
         } else {
             header("Location: ../../userLogin.php");
         }

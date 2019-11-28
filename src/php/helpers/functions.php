@@ -2,7 +2,8 @@
 
 	//This function prints the errorMessage on browser's console
 	function printError($errorMessage){
-		echo '<script>console.log("',$errorMessage,'");</script>';
+		$errorMessage=str_replace("\n","",$errorMessage);
+		echo '<script>console.error("',$errorMessage,'");</script>';
 	}
 	
 	//This function alerts the messages in client browser
@@ -11,12 +12,12 @@
 	}
 	
 	function goHome(){
-		echo '<script>window.location.replace("https://starave.club/src/home.php");</script>';
-		// header("Location: ../home.php");
+		echo '<script>window.location.replace("https://starave.club/src/php/home.php");</script>';
+		// header("Location: ../php/home.php");
 	}
 	function showResults(){
                 echo '<script>window.location.replace("https://starave.club/src/php/results.php");</script>';
-                // header("Location: ../home.php");
+                // header("Location: ../php/home.php");
         }
 ?>
 
