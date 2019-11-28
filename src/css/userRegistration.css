@@ -20,6 +20,15 @@ body {
     text-transform: capitalize;
     font-family: 'Roboto', sans-serif;
   }
+
+  h3 {
+    text-align: center;
+    color: #fff;
+    /* this is for changing boldness, case, and font of the title  */
+    font-weight: 100;
+    text-transform: capitalize;
+    font-family: 'Roboto', sans-serif;
+  }
   
   /*-- main --*/
   .main-w3layouts {
@@ -97,3 +106,11 @@ footer {
     margin-top: 0;
   }
 }
+
+
+
+.error {
+    color: #fff;
+    font-size: 10px
+}
+

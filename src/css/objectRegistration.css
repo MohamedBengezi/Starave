@@ -48,6 +48,12 @@ footer {
     background-color: #22282a;
     text-align: center;
 }
+
+.error {
+    color:#FFFFFF;
+    font-size:10px;
+
+}
   
   /* Styling for most of the input fields */
   input[type="text"], input[type="email"], input[type="password"], input[type="number"], input[type="file"] {
