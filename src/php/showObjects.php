@@ -3,7 +3,7 @@
 <?php include "../../../inc/aws-s3.inc"; ?>
 <?php
     session_start();
-    require 'vendor/autoload.php';
+    require '../vendor/autoload.php';
     use Aws\S3\S3Client;
     use Aws\S3\Exception\S3Exception;
 
@@ -128,11 +128,12 @@ if (empty($_POST["Description"])) {
                 <form id="userRegistration" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post">
                     <!-- All inputs for the form -->
                     <span class="error" ><?php echo $ratingErr;?></span>
-                    <input type="number" name="rating" placeholder="Rating" min="1" max="5">
+                    <input id="rating" type="number" name="rating" placeholder="Rating" min="1" max="5">
 
                     <span class="error" ><?php echo $descErr;?></span>
-                    <input class="text" type="text" name="Description" placeholder="Description" ><br/>
-
+                    <input id="description" class="text" type="text" name="Description" placeholder="Description" ><br/>
+		    <input type="number" name="id" hidden  value="<?php echo $ID ?>" >
+                    <input id="userName" type="text" name="userName" hidden  value="<?php echo $userName ?>" >
                     <input type="submit"  value="SUBMIT REVIEW">
                 </form>
             </div>
@@ -168,7 +169,7 @@ for($i=0; $i<$number; $i++){
             echo '</div>';
 }
  ?>
-<a class="list-group-item list-group-item-action flex-column align-items-start h-100">
+<a class="list-group-item list-group-item-action flex-column align-items-start h-100" id="googleMaps">
                 <div id="map"></div>
                 <script type="text/javascript" src="../js/results.js"> </script>
                 <?php
@@ -176,24 +177,5 @@ for($i=0; $i<$number; $i++){
                 ?>
                 </script>
             </a>
-<?php
- /* Connect to MySQL and select the database. */
-    $pdo1 = new PDO('mysql:host='.DB_SERVER.';dbname='.DB_DATABASE, DB_USERNAME, DB_PASSWORD);
-    $pdo1->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
-    $pdo1->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
-    
-    $sql = "insert into reviews values($ID, null, $userName, $clubRating, $clubDesc)";
-    echo $sql;
-    $stmnt = $pdo1->prepare($sql);
-    try{
-        $stmnt->execute([]);
-    }catch (PDOException $e) {
-        printError("got error");
-        echo $e->getMessage();
-        printError($e->getMessage());
-    }
-    $pdo1 = null;
- ?>
 <?php include "./footer.php"; ?>
 

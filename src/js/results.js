@@ -40,3 +40,45 @@ function initMap() {
     }
 
 }
+
+$(document).ready(function() {
+    $('#userRegistration').submit(function(e) {
+        e.preventDefault();
+        $.ajax({
+            type: "POST",
+            url: 'addReviews.php',
+            data: $(this).serialize(),
+            success: function(response)
+            {   
+                console.log(response);
+                var jsonData = JSON.parse(response);
+ 
+                // user is logged in successfully in the back-end
+                // let's redirect
+                if (jsonData.success == "1")
+                {
+                    console.log("POSTED REVIEW");
+                    showReview();
+                }
+                else
+                {
+                    console.log(jsonData.success);
+                }
+           }
+       });
+     });
+   
+    function showReview(){
+    alert("Added the review!");
+    var elements = '<div class="container"><img src="../../assets/chris.png" alt="Avatar" style="width:90px"> <p> <span>'+ $("#userName").val() + '</span></p><p>' + $("#description").val()  + '</p> <div class="rating mr-3">';
+    //This is to generate the stars
+    for (i = 0; i < $("#rating").val(); i++) {
+     elements += '<span class="fa fa-star checked"></span>';
+    }
+    for (i = 0; i < (5-$("#rating").val()); i++){
+     elements += '<span class="fa fa-star"></span>';
+    }
+    elements += '</div></div>';  
+    $("#googleMaps").before(elements);
+    }
+});
