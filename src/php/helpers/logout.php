@@ -1,9 +1,6 @@
-<?php 
-    session_start();
-    echo $_SESSION['ID'];
-    session_unset();
-    session_destroy();
-    unset($_SESSION['ID']);
-    echo $_SESSION['ID'];
-    header("Location: ../objectRegistration.php");
-?>
+<?php //Logout the user by destroying session and redirecting to home
+session_start();
+session_unset();
+session_destroy();
+unset($_SESSION['ID']);
+header("Location: ../home.php");

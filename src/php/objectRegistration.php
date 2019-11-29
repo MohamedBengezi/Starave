@@ -211,14 +211,6 @@ function AddClub($pdo, $clubName, $clubRating, $clubLat, $clubLong, $clubDesc, $
 
 }
 
-//Test the input to ensure no one tries anything fishy
-function test_input($data)
-{
-    $data = trim($data);
-    $data = stripslashes($data);
-    $data = htmlspecialchars($data);
-    return $data;
-}
 //cleaning up
 $_POST = array();
 

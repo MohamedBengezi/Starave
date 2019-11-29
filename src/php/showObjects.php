@@ -35,20 +35,20 @@ $keyName = $rows[$index]['IMAGE'];
 $pdo = new PDO('mysql:host=' . DB_SERVER . ';dbname=' . DB_DATABASE, DB_USERNAME, DB_PASSWORD);
 $pdo->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
 $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-//Get reviews for this club
-$sql = "select * from reviews WHERE CLUB_ID=$ID;";
-$sql = "select * from reviews WHERE CLUB_ID=$ID;";
-$sql = "select * from reviews WHERE CLUB_ID=$ID;";
 
+//Get user reviews for this club
+$sql = "select * from reviews WHERE CLUB_ID=$ID;";
 $stmnt = $pdo->prepare($sql);
 try {
     $stmnt->execute([]);
+    //gonna use $newRows later
     $newRows = $stmnt->fetchAll();
     $number = count($newRows);
 } catch (PDOException $e) {
     printError("got error");
     printError($e->getMessage());
 }
+
 //Get the image for this club
 try {
 
@@ -90,13 +90,6 @@ if (empty($_POST["Description"])) {
     $clubDesc = test_input($_POST["Description"]);
 }
 
-function test_input($data)
-{
-    $data = trim($data);
-    $data = stripslashes($data);
-    $data = htmlspecialchars($data);
-    return $data;
-}
 ?>
 <?php include "./header.php"?>
 
@@ -124,26 +117,28 @@ echo "<script> clubLocations.push(latLng);</script>";
         <ul class="column mt-5">
             <li>
                 <p class="mb-1">
-
+                    <!-- Using the description for this club from the query -->
 		     <?php echo $rows[$index]['DESCRIPTION']; ?>
                 </p>
             </li>
         </ul>
     </div>
 
-    <!-- Div for the user registration form -->
+    <!-- Div for the submit review form -->
     <div class="main-w3layouts wrapper">
         <div class="main-agileinfo col-75">
             <div class="agileits-top ">
                 <h3>Submit a review</h3>
                 <form id="userRegistration" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
                     <!-- All inputs for the form -->
+                    <!-- span for displaying an input errors -->
                     <span class="error" ><?php echo $ratingErr; ?></span>
                     <input id="rating" type="number" name="rating" placeholder="Rating" min="1" max="5">
-
+                    <!-- span for displaying an input errors -->
                     <span class="error" ><?php echo $descErr; ?></span>
                     <input id="description" class="text" type="text" name="Description" placeholder="Description" ><br/>
-		    <input type="number" name="id" hidden  value="<?php echo $ID ?>" >
+                    <!-- Already know username and club ID -->
+		            <input type="number" name="id" hidden  value="<?php echo $ID ?>" >
                     <input id="userName" type="text" name="userName" hidden  value="<?php echo $userName ?>" >
                     <input type="submit"  value="SUBMIT REVIEW">
                 </form>
@@ -152,7 +147,7 @@ echo "<script> clubLocations.push(latLng);</script>";
 
     </div>
 
-    <!-- first user review -->
+    <!-- user reviews in a loop -->
 <?php
 for ($i = 0; $i < $number; $i++) {
     ?>
@@ -161,7 +156,9 @@ for ($i = 0; $i < $number; $i++) {
         <img src="../../assets/chris.png" alt="Avatar" style="width:90px">
         <!-- Name, title, and review -->
         <p>
-<?php echo '<span>', $newRows[$i]['NAME'], '</span></p>';
+    <?php
+//Getting user name, club description, and rating query above
+    echo '<span>', $newRows[$i]['NAME'], '</span></p>';
     echo '<p>', $newRows[$i]['DESCRIPTION'], '</p>';
 
     echo '    <div class="rating mr-3">';
@@ -180,6 +177,7 @@ for ($i = 0; $i < $number; $i++) {
     echo '</div>';
 }
 ?>
+<!-- Using script from results.js to dynamically display map markers -->
 <a class="list-group-item list-group-item-action flex-column align-items-start h-100" id="googleMaps">
                 <div id="map"></div>
                 <script type="text/javascript" src="../js/results.js"> </script>
