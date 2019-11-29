@@ -1,4 +1,5 @@
 <?php include "../../../../inc/dbinfo.inc"; ?>
+<?php include "./functions.php";?>
 <?php 
     session_start();
     // using php data objects we set the login parameters for the database. 
@@ -12,12 +13,13 @@
         $pass = test_input($_POST['password']);
 
         // Query we are using to check if the user is legit
+        $newPass = hashPass($pass); 
         $sql = "Select * from user where EMAIL=? and PASS=?";
         // Prepared statements: For when we don't have all the parameters so we store a template to be executed
         // More information here: https://www.w3schools.com/php/php_mysql_prepared_statements.asp
         $stmnt = $pdo->prepare($sql);
         try {
-            $stmnt->execute([$email, $pass]);
+            $stmnt->execute([$email, $newPass]);
         } catch (PDOException $e) {
             echo $e->getMessage();
         }
@@ -32,7 +34,7 @@
             // Redirect to table of users.
             header("Location: ../../php/home.php");
         } else {
-            header("Location: ../../userLogin.php");
+            header("Location: ../userLogin.php");
         }
 
     } else {

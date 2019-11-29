@@ -157,16 +157,17 @@ $notEmpty = strlen($userName) || strlen($userEmail) || strlen($userPassword) || 
 
 /* Add a user to the table. */
 function AddUser($pdo, $userName, $email,$password,$age,$gender) {
+   $newPass = hashPass($password);
 
    $query = "insert into user (ID, USERNAME, EMAIL, PASS, AGE, GENDER) values (null,?, ?, ?, ?, ?);";
    $stmnt = $pdo->prepare($query);
    try {
-            $stmnt->execute([$userName, $email,$password,$age,$gender]);
+            $stmnt->execute([$userName, $email, $newPass, $age, $gender]);
 
     //When the sign up is successful, login the user automatically
     $query= "Select * from user where EMAIL=? and PASS=?";
     $stmnt = $pdo->prepare($query);
-    $stmnt->execute([$email,$password]);
+    $stmnt->execute([$email,$newPass]);
     $rows = $stmnt->fetchAll();
 
         // If there is only one user
@@ -187,6 +188,7 @@ function AddUser($pdo, $userName, $email,$password,$age,$gender) {
             echo '<script>document.getElementById("',$gender,'").checked=true; </script>';
          }
  }
+
 
 function test_input($data) {
     $data = trim($data);
