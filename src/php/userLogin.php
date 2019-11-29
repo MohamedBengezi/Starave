@@ -1,10 +1,10 @@
-<?php include "../../../inc/dbinfo.inc"; ?>
-<?php include "./header.php"; ?>
+<?php include "../../../inc/dbinfo.inc";?>
+<?php include "./header.php";?>
 <link rel="stylesheet" type="text/css" href="../css/userRegistration.css" />
 </head>
 
 <body>
-    <?php include "./navigationMenu.php"; ?>
+    <?php include "./navigationMenu.php";?>
 
     <!-- Div for the user registration form -->
     <div class="main-w3layouts wrapper">
@@ -21,5 +21,5 @@
 
     </div>
 
-    <? php include "./footer.php"; ?>
+    <?php include "./footer.php";?>
 
