@@ -1,19 +1,18 @@
-<?php include "../../../inc/dbinfo.inc"; ?>
-<?php include "./helpers/functions.php"; ?>
+<!--include statements to import commonly used sections like header, nav menu and footer -->
 <html lang="en">
 <?php include "./header.php"; ?>
 <?php
+    //starting the session in order to retrieve session info 
     session_start();
 ?>
-<!DOCTYPE html>
+<!--import the stylesheet -->
 <link rel="stylesheet" type="text/css" href="../css/main.css" />
 </head>
 
 <body>
+    <!-- including the nav menu and footer--> 
     <?php include "./navigationMenu.php"; ?>
-  <footer>
-    <a href="../../sitemap.xml">Sitemap</a> <!-- This is the footer that will be in all the pages -->
-  </footer> 
+    <?php include "./footer.php"; ?>
 </body>
 </html>
 
