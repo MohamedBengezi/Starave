@@ -1,9 +1,13 @@
 // Initialize and add the map
 function initMap() {
+    //check if user inputted location, if not use hamilton as default
+    if (!Number.isNaN(parseFloat(userLocation[0])) && !Number.isNaN(parseFloat(parseFloat(userLocation[1])))){
+        var center = { lat: parseFloat(userLocation[0]), lng: parseFloat(userLocation[1]) };
+    } else { 
+        var center = {lat: 43.255016, lng: -79.868050} 
+    }
     // The location of each club
-    var center = { lat: parseFloat(userLocation[0]), lng: parseFloat(userLocation[1]) };
     var numClubs = clubLocations.length;
-  
     var clubCoords;
     var map = new google.maps.Map(
         document.getElementById('map'), { zoom: 9, center: center });
@@ -33,6 +37,7 @@ function initMap() {
         clubCoords = { lat: clubLocations[i][0], lng: clubLocations[i][1] };
 //        markerList.push(new google.maps.Marker({ position: clubCoords, map: map });)
         clubMarker = new google.maps.Marker({ position: clubCoords, map: map });
+     console.log(clubCoords);
         clubMarker.addListener('click', function () {
             infowindow.open(map, clubMarker);
         });

@@ -28,8 +28,8 @@
             </div>
             <div id="location-select">
                 <h2 class="text-uppercase mt-3">Location</h2>
-                    <input type="number" step="0.0000000000000001" name="latitude" placeholder="Latitude" class=" w-25 name ">
-                    <input type="number" step="0.0000000000000001" name="longitude" placeholder="Longitude" class=" w-25 name ">
+                    <input type="number" step="0.0000000000000001" name="latitude" placeholder="Latitude" class=" w-25 name " >
+                    <input type="number" step="0.0000000000000001" name="longitude" placeholder="Longitude" class=" w-25 name " >
 
                     <input type="button" class="btn btn-outline-success mt-2 mb-2" onclick="getLocation()" value="Find Location">
 
@@ -62,27 +62,29 @@
     printError($Long);
     printError($clubRating);
 
-    $sql = "select * from clubs WHERE RATING=$clubRating;";
+    $sql = "select * from clubs WHERE RATING>=$clubRating;";
   
 
     if (!empty($clubName) && !empty($Lat) && !empty($Long) && !empty($clubRating)){
-         $sql = "SELECT ID,NAME,RATING,LATITUDE,LONGITUDE,DESCRIPTION,IMAGE, ( 6371 * acos( cos( radians($Lat) ) * cos( radians( LATITUDE ) ) * cos( radians( LONGITUDE ) - radians($Long) ) + sin( radians($Lat) ) * sin(radians(LATITUDE)) ) ) AS distance FROM clubs WHERE NAME='$clubName' AND RATING=$clubRating HAVING distance < 15 ORDER BY distance LIMIT 0, 3 ;";
+         $sql = "SELECT ID,NAME,RATING,LATITUDE,LONGITUDE,DESCRIPTION,IMAGE, ( 6371 * acos( cos( radians($Lat) ) * cos( radians( LATITUDE ) ) * cos( radians( LONGITUDE ) - radians($Long) ) + sin( radians($Lat) ) * sin(radians(LATITUDE)) ) ) AS distance FROM clubs WHERE NAME='$clubName' AND RATING>=$clubRating HAVING distance < 15 ORDER BY distance LIMIT 0, 3 ;";
     } else if(empty($clubName) && !empty($Lat) && !empty($Long) && !empty($clubRating)) {
-       $sql = "SELECT ID,NAME,RATING,LATITUDE,LONGITUDE,DESCRIPTION,IMAGE, ( 6371 * acos( cos( radians($Lat) ) * cos( radians( LATITUDE ) ) * cos( radians( LONGITUDE ) - radians($Long) ) + sin( radians($Lat) ) * sin(radians(LATITUDE)) ) ) AS distance FROM clubs WHERE RATING=$clubRating HAVING distance < 15 ORDER BY distance LIMIT 0, 3 ;";
+       $sql = "SELECT ID,NAME,RATING,LATITUDE,LONGITUDE,DESCRIPTION,IMAGE, ( 6371 * acos( cos( radians($Lat) ) * cos( radians( LATITUDE ) ) * cos( radians( LONGITUDE ) - radians($Long) ) + sin( radians($Lat) ) * sin(radians(LATITUDE)) ) ) AS distance FROM clubs WHERE RATING>=$clubRating HAVING distance < 15 ORDER BY distance LIMIT 0, 3 ;";
       }else if(!empty($clubName) && empty($Lat) && empty($Long) && !empty($clubRating)) {
-       $sql = "SELECT ID,NAME,RATING,LATITUDE,LONGITUDE,DESCRIPTION,IMAGE FROM clubs WHERE NAME='$clubName' AND RATING=$clubRating;";
+       $sql = "SELECT ID,NAME,RATING,LATITUDE,LONGITUDE,DESCRIPTION,IMAGE FROM clubs WHERE NAME='$clubName' AND RATING>=$clubRating;";
       }
 printError($sql);
     $stmnt = $pdo->prepare($sql);
         try{
                 $stmnt->execute([]);
                 $rows= $stmnt->fetchAll();
+                $_SESSION['userLocation'] = [$Lat, $Long];
                 $_SESSION['rows'] = $rows; //setting this variable in session, so results.php could use it.
 		$number = count($rows);
 		if($number==0){
 			alert("NO RESULTS FOUND!");
 		}
 		else{
+printError($rows[0]['LATITUDE']);
 			showResults();
 		}
         }catch (PDOException $e) {
