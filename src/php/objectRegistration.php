@@ -199,11 +199,12 @@ function AddClub($pdo, $clubName, $clubRating, $clubLat, $clubLong, $clubDesc, $
     try {
         //try to run the query and then redirect to home
         $stmnt->execute([$clubName, $clubRating, $clubLat, $clubLong, $clubDesc, $clubImage]);
-        goHome();
+        alert("Added the club!");
 
     } catch (PDOException $e) {
         //if there are errors, print them to console & refresh the page with input fields filled in
         printError($e->getMessage());
+        alert("Something went wrong! Please try again!");
         echo '<script>document.getElementsByName("Club")[0].value="', $clubName, '"</script>';
         echo '<script>document.getElementsByName("rating")[0].value="', $clubRating, '"</script>';
         echo '<script>document.getElementsByName("latitude")[0].value="', $clubLat, '"</script>';
