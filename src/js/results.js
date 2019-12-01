@@ -40,6 +40,8 @@ function createMarkers(clubCoords, map, name, contentString) {
 }
 
 $(document).ready(function() {
+
+     //This function will make an ajax call to the server to add the review to the database, when the user clicks the submit button
     $('#userRegistration').submit(function(e) {
         e.preventDefault();
         $.ajax({
@@ -65,18 +67,19 @@ $(document).ready(function() {
            }
        });
      });
-   
+    
+    //This function will add the review to the html page dynamically, when the ajax call to add the review to the database is successful. 
     function showReview(){
-    alert("Added the review!");
-    var elements = '<div class="container"><img src="../../assets/chris.png" alt="Avatar" style="width:90px"> <p> <span>'+ $("#userName").val() + '</span></p><p>' + $("#description").val()  + '</p> <div class="rating mr-3">';
-    //This is to generate the stars
-    for (i = 0; i < $("#rating").val(); i++) {
-     elements += '<span class="fa fa-star checked"></span>';
-    }
-    for (i = 0; i < (5-$("#rating").val()); i++){
-     elements += '<span class="fa fa-star"></span>';
-    }
-    elements += '</div></div>';  
-    $("#googleMaps").before(elements);
+        alert("Added the review!");
+        var elements = '<div class="container"><img src="../../assets/chris.png" alt="Avatar" style="width:90px"> <p> <span>'+ $("#userName").val() + '</span></p><p>' + $("#description").val()  + '</p> <div class="rating mr-3">';
+        //This is to generate the stars
+        for (i = 0; i < $("#rating").val(); i++) {
+         elements += '<span class="fa fa-star checked"></span>';
+        }
+        for (i = 0; i < (5-$("#rating").val()); i++){
+         elements += '<span class="fa fa-star"></span>';
+        }
+        elements += '</div></div>';  
+        $("#googleMaps").before(elements);
     }
 });

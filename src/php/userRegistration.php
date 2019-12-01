@@ -3,7 +3,7 @@
 <?php include "./header.php";?>
 <?php
 session_start();
-// Check if session is a logged in one, if it is then redirect to login.
+// Check if session is a logged in one, if it is then redirect to home page.
 if (isset($_SESSION['ID'])) {
     header("Location: ../php/home.php");
 }
@@ -20,6 +20,8 @@ if (isset($_SESSION['ID'])) {
 $nameErr = $emailErr = $passErr = $ageErr = $genderErr = "";
 $userName = $userEmail = $userPassword = $userAge = $userGender = "";
 $error = 0;
+
+//Checks if the username is emprty or not
 if (empty($_POST['Username'])) {
     $error = 1;
     $nameErr = "Username is required";
@@ -27,6 +29,7 @@ if (empty($_POST['Username'])) {
     $userName = test_input($_POST['Username']);
 }
 
+//Checks if the email is emprty or not
 if (empty($_POST["email"])) {
     $error = 1;
     $emailErr = "Email is required";
@@ -34,6 +37,7 @@ if (empty($_POST["email"])) {
     $userEmail = test_input($_POST['email']);
 }
 
+//Checks if the password is emprty or not
 if (empty($_POST["password"])) {
     $error = 1;
     $passErr = "Password is required";
@@ -41,6 +45,7 @@ if (empty($_POST["password"])) {
     $userPassword = test_input($_POST['password']);
 }
 
+//Checks if the confirm password is emprty or not and if it is same as the previously entered password.
 if (empty($_POST["repassword"])) {
     $error = 1;
     $passErr = "Password is required";
@@ -53,6 +58,7 @@ if (empty($_POST["repassword"])) {
     }
 }
 
+//Checks if the age is emprty or not
 if (empty($_POST["age"])) {
     $error = 1;
     $ageErr = "Age is required";
@@ -60,6 +66,7 @@ if (empty($_POST["age"])) {
     $userAge = test_input($_POST['age']);
 }
 
+//Checks if the gender is emprty or not
 if (empty($_POST["gender"])) {
     $error = 1;
     $genderErr = "Gender is required";
@@ -67,6 +74,7 @@ if (empty($_POST["gender"])) {
     $userGender = test_input($_POST["gender"]);
 }
 
+//Database connection
 $pdo1 = new PDO('mysql:host=' . DB_SERVER . ';dbname=' . DB_DATABASE, DB_USERNAME, DB_PASSWORD);
 $pdo1->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
 $pdo1->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
