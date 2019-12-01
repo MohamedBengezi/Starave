@@ -1,3 +1,4 @@
+<!-- php file for navigation menu that is displayed on most of the pages -->
 <?php include "../../../inc/dbinfo.inc"; ?>
 <?php
     session_start();
@@ -12,27 +13,27 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="../php/home.php">
+                        <a class="nav-link" href="../php/home.php"> <!-- Link for the home page -->
                             Home
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="./userRegistration.php">Register</a>
+                        <a class="nav-link" href="./userRegistration.php">Register</a> <!-- Link for user registration page -->
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="./objectRegistration.php">Add Club</a>
+                        <a class="nav-link" href="./objectRegistration.php">Add Club</a> <!-- Link for adding club page -->
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="">Contact Us</a>
                     </li>
               <?php if (isset($_SESSION['ID'])) { ?>
-                    <a class="nav-link" href="helpers/logout.php">Logout</a>
+                    <a class="nav-link" href="helpers/logout.php">Logout</a> <!-- Link to logout the user -->
               <?php }else{ ?>
-                    <a class="nav-link" href="helpers/login.php">Login</a>
+                    <a class="nav-link" href="helpers/login.php">Login</a> <!-- Link for the user to log into the application -->
               <?php } ?>
                 </ul>
                 <form class="form-inline my-2 my-lg-0" action="search.php">
-                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button> <!-- Link for the search page -->
                 </form>
             </div>
         </nav>

@@ -1,4 +1,4 @@
-
+<!-- php file for header of most of the pages -->
 
 <!DOCTYPE html>
 <html lang="en">

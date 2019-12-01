@@ -11,26 +11,30 @@
 		echo '<script>alert("',$Message,'");</script>';
 	}
 	
+	//This function redirects the user to home page
 	function goHome(){
 		echo '<script>window.location.replace("https://starave.club/src/php/home.php");</script>';
-		// header("Location: ../php/home.php");
 	}
+
+	//This function shows the results to the user
 	function showResults(){
                 echo '<script>window.location.replace("https://starave.club/src/php/results.php");</script>';
-                // header("Location: ../php/home.php");
         }
-function hashPass($pass) {
-    $salted = "djnfoiuwe9832482nwejfn".$pass."iowjdqio";
-    $hashed = hash('sha512', $salted);
-    return $hashed;
-}
 
-function test_input($data) {
-    $data = trim($data);
-    $data = stripslashes($data);
-    $data = htmlspecialchars($data);
-    return $data;
-}
+    //This function hashes the password and returns it    
+	function hashPass($pass) {
+	    $salted = "djnfoiuwe9832482nwejfn".$pass."iowjdqio";
+	    $hashed = hash('sha512', $salted);
+	    return $hashed;
+	}
+
+    //This function is used to prevent sql injection attacks.
+	function test_input($data) {
+	    $data = trim($data);
+	    $data = stripslashes($data);
+	    $data = htmlspecialchars($data);
+	    return $data;
+	}
 
 ?>
 
