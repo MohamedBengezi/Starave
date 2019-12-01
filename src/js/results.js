@@ -4,7 +4,7 @@ function initMap() {
     if (!Number.isNaN(parseFloat(userLocation[0])) && !Number.isNaN(parseFloat(parseFloat(userLocation[1])))){
         var center = { lat: parseFloat(userLocation[0]), lng: parseFloat(userLocation[1]) };
     } else { 
-        var center = {lat: 43.255016, lng: -79.868050} 
+        var center = {lat: 43.4548536, lng: -79.7225096} 
     }
     // The location of each club
     var numClubs = clubLocations.length;

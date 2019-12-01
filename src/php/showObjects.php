@@ -105,9 +105,9 @@ if (empty($_POST["Description"])) {
     </div>
         <?php
 //Displaying club location on google maps. See results.php for detailed comments
-echo "<script> var clubLocations = [];var userLocation = [", $userLocation[0], ",", $userLocation[1], "]</script>";
+echo "<script> var clubLocations = [];var clubNames = []; var userLocation = [", $userLocation[0], ",", $userLocation[1], "]</script>";
 echo "<script> var latLng = []; latLng.push(", $rows[$index]['LATITUDE'], "); latLng.push(", $rows[$index]['LONGITUDE'], ");</script>";
-echo "<script> clubLocations.push(latLng);</script>";
+echo "<script> clubLocations.push(latLng); clubNames.push('",$rows[$index]['NAME'],"');</script>";
 ?>
     <!-- Section for the club picture and desccription -->
     <div class="desc">
