@@ -41,7 +41,7 @@ $bucketName = BUCKET;
             	<!-- Club object -->
 <?php
 //define JS variables for the club locations and user location. Gonna pass these to google maps
-echo "<script> var clubLocations = [];var userLocation = [", $userLocation[0], ",", $userLocation[1], "]</script>";
+echo "<script> var clubLocations = [];var clubNames = []; var userLocation = [", $userLocation[0], ",", $userLocation[1], "]</script>";
 //Loop through each club that we got from the qeury and dynamically display info
 for ($i = 0; $i < $number; $i++) {
     //Retrieving image from S3 bucket
@@ -68,7 +68,7 @@ for ($i = 0; $i < $number; $i++) {
     }
     //Add current club's coordinates to the clubLocations array
     echo "<script> var latLng = []; latLng.push(", $rows[$i]['LATITUDE'], "); latLng.push(", $rows[$i]['LONGITUDE'], ");</script>";
-    echo "<script> clubLocations.push(latLng);</script>";
+    echo "<script> clubLocations.push(latLng); clubNames.push('",$rows[$i]['NAME'],"');</script>";
     //When user clicks on a club item, go to showObjects.php and pass in the club id and index in query through the URL
     echo '<a href="showObjects.php?id=', $rows[$i]['ID'], '&index=', $i, '" class="list-group-item list-group-item-action flex-column align-items-start h-100">';
     //display the html content and fill in the content with the current club item

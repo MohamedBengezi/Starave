@@ -12,37 +12,30 @@ function initMap() {
     var map = new google.maps.Map(
         document.getElementById('map'), { zoom: 9, center: center });
 
-    //A sample description to display in the label
+
+    for (var i=0; i < numClubs; i++){
+        clubCoords = { lat: clubLocations[i][0], lng: clubLocations[i][1] };
+
     var contentString = '<div id="content">' +
         '<div id="siteNotice">' +
         '</div>' +
-        '<h1 id="firstHeading" class="firstHeading">Modrn</h1>' +
-        '<div id="bodyContent">' +
-        '<p><b>Modrn</b>, one of the most popular clubs on ' +
-        'Hess st. and in all of Hamilton. Known for it\'s ' +
-        'great selection of Hip/Hop and Pop music.</p>' +
-        '<p>More info: Uluru, <a href="./clubs/modrn.html">' +
-        'Detailed Info</a> ' +
-        '</p>' +
-        '</div>' +
+        '<h1 id="firstHeading" class="firstHeading">'+ clubNames[i]+'</h1>' +
         '</div>';
 
-    //Creating an infowindow (AKA label popup) with the content being the description above
+    createMarkers(clubCoords, map, clubNames[i], contentString);
+    }
+
+}
+
+function createMarkers(clubCoords, map, name, contentString) {
+    var marker = new google.maps.Marker({ position: clubCoords, map: map, title: name});
     var infowindow = new google.maps.InfoWindow({
         content: contentString
     });
-
-    //
-    for (var i=0; i < numClubs; i++){
-        clubCoords = { lat: clubLocations[i][0], lng: clubLocations[i][1] };
-//        markerList.push(new google.maps.Marker({ position: clubCoords, map: map });)
-        clubMarker = new google.maps.Marker({ position: clubCoords, map: map });
-     console.log(clubCoords);
-        clubMarker.addListener('click', function () {
-            infowindow.open(map, clubMarker);
+    marker.addListener('click', function () {
+            infowindow.open(map, marker);
         });
-        
-    }
+    
 
 }
 
