@@ -1,5 +1,6 @@
 <?php include "../../../inc/dbinfo.inc";?>
 <?php include "./header.php";?>
+<?php include "./helpers/functions.php"; ?>
 <link rel="stylesheet" type="text/css" href="../css/userRegistration.css" />
 </head>
 
@@ -21,6 +22,10 @@
         </div>
 
     </div>
-
+   <?php 
+   	if($_SESSION['LOGINFAILED']==true){
+          alert("Login failed! Please try again");
+        } 
+   ?>
     <?php include "./footer.php";?>
 
