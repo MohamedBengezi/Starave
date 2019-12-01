@@ -5,6 +5,8 @@
 <?php
 session_start();
 // Check if session is a logged in one, if it isn't then redirect to login.
+$_SESSION['PAGE']="Location: ../objectRegistration.php";
+
 if (!isset($_SESSION['ID'])) {
     header("Location: userLogin.php");
 }

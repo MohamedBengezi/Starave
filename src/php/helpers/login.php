@@ -32,9 +32,16 @@ if (isset($_POST['email']) && isset($_POST['password'])) {
         $_SESSION['ID'] = $rows[0]['ID'];
         $_SESSION['USERNAME'] = $rows[0]['USERNAME'];
         // Redirect to home.
-        header("Location: ../../php/home.php");
+        if (isset($_SESSION['PAGE'])){
+                alert($_SESSION['PAGE']);
+        	header($_SESSION['PAGE']);
+        }else{
+		header("Location: ../home.php");
+        }
+        
     } else {
         //if something went wrong, redirect back to login page
+	alert("Please try again!");
         header("Location: ../userLogin.php");
     }
 
