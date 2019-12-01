@@ -31,6 +31,7 @@ if (isset($_POST['email']) && isset($_POST['password'])) {
         // Setting the session to the returned user ID.
         $_SESSION['ID'] = $rows[0]['ID'];
         $_SESSION['USERNAME'] = $rows[0]['USERNAME'];
+        $_SESSION['LOGINFAILED']=false;
         // Redirect to home.
         if (isset($_SESSION['PAGE'])){
         	header($_SESSION['PAGE']);
@@ -46,6 +47,5 @@ if (isset($_POST['email']) && isset($_POST['password'])) {
 
 } else {
     //if credentials aren, redirect back to login page
-    $_SESSION['LOGINFAILED']=true;
     header("Location: ../userLogin.php");
 }

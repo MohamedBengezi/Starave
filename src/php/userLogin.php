@@ -23,7 +23,8 @@
 
     </div>
    <?php 
-   	if($_SESSION['LOGINFAILED']==true){
+   	if(isset($_SESSION['LOGINFAILED']) && $_SESSION['LOGINFAILED']==true){
+          $_SESSION['LOGINFAILED']=false;
           alert("Login failed! Please try again");
         } 
    ?>
